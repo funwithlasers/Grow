@@ -3,7 +3,7 @@
  */
 package core;
 
-import javax.swing.JMenuBar;
+import java.awt.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Lock;
 import common.misc.CppToJava;
@@ -11,17 +11,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Graphics2D;
+
 import common.Time.PrecisionTimer;
-import java.awt.Color;
-import java.awt.Cursor;
+
 import static common.misc.Cgdi.gdi;
-import java.awt.Graphics;
+
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
-import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
 import javax.swing.JFrame;
 import static core.constants.*;
 import static common.misc.WindowUtils.*;
@@ -44,7 +40,7 @@ public class Main {
      *	The entry point of the windows program
      */
     public static void main(String[] args) {
-        final Window window = new Window(g_szApplicationName);
+        final JFrame window = new JFrame(g_szApplicationName);
         window.setIconImage(LoadIcon("/core/example.png"));
         window.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         final BufferedImage buffer = new BufferedImage(constWindowWidth, constWindowHeight, BufferedImage.TYPE_INT_RGB);
@@ -52,8 +48,24 @@ public class Main {
         //these hold the dimensions of the client window area
         final int cxClient = buffer.getWidth();
         final int cyClient = buffer.getHeight();
-        //seed random number generator
+        //seed  number generator
         common.misc.utils.setSeed(0);
+
+        /**
+         * This sets this screen to full screen
+         * TODO: maybe make 100% full screen, or maybe decide on smaller window size
+         */
+        window.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        window.setUndecorated(true);
+        window.setVisible(true);
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Point hotSpot = new Point(0,0);
+        BufferedImage cursorImage = new BufferedImage(1, 1, BufferedImage.TRANSLUCENT);
+        Cursor invisibleCursor = toolkit.createCustomCursor(cursorImage, hotSpot, "InvisibleCursor");
+        window.getContentPane().setCursor(invisibleCursor);
+
+
 
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Point center = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
@@ -65,7 +77,6 @@ public class Main {
         window.setLocation(center.x - window.getWidth() / 2, y >= 0 ? y : 0);
         g_GameWorld = new GameWorld(cxClient, cyClient);
 
-        window.setJMenuBar(Script1.createMenu(IDR_MENU1, g_GameWorld));
 
         final JPanel panel = new JPanel() {
 
@@ -75,7 +86,7 @@ public class Main {
                 hdcBackBuffer.setPaint(Color.RED);
                 gdi.StartDrawing(hdcBackBuffer);
                 //fill our backbuffer with white
-                gdi.fillRect(Color.WHITE, 0, 0, constWindowWidth, constWindowHeight);
+                gdi.fillRect(Color.GREEN, 0, 0, constWindowWidth, constWindowHeight);
                 GameWorldLock.lock();
                 g_GameWorld.Render();
                 GameWorldLock.unlock();
@@ -90,8 +101,8 @@ public class Main {
         window.add(panel);
         window.pack();
 
-        ChangeMenuState(window.getMenu(), IDR_PRIORITIZED, MFS_CHECKED);
-        ChangeMenuState(window.getMenu(), ID_VIEW_FPS, MFS_CHECKED);
+//        ChangeMenuState(window.getMenu(), IDR_PRIORITIZED, MFS_CHECKED);
+//        ChangeMenuState(window.getMenu(), ID_VIEW_FPS, MFS_CHECKED);
 
         window.addMouseListener(new MouseAdapter() {
 
@@ -120,9 +131,6 @@ public class Main {
                         GameWorldLock.lock();
                         g_GameWorld = null;
                         g_GameWorld = new GameWorld(cxClient, cyClient);
-                        JMenuBar bar = Script1.createMenu(IDR_MENU1, g_GameWorld);
-                        window.setJMenuBar(bar);
-                        bar.revalidate();
                         GameWorldLock.unlock();
                     }
                     break;

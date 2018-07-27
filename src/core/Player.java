@@ -5,6 +5,7 @@
  */
 package core;
 
+import java.awt.*;
 import java.util.ArrayList;
 import common.misc.SmootherV2;
 import common.D2.Vector2D;
@@ -108,7 +109,7 @@ public class Player extends MovingEntity {
         //keep a record of its old position so we can update its cell later
         //in this method
         Vector2D OldPos = Pos();
-
+/**
         Vector2D SteeringForce;
 
         //calculate the combined force from each steering behavior in the 
@@ -126,7 +127,11 @@ public class Player extends MovingEntity {
 
         //update the position
         m_vPos.add(mul(m_vVelocity, time_elapsed));
+**/
 
+       // m_vPos.set(new Vector2D(  , MouseInfo.getPointerInfo().getLocation().y ) );
+        m_vPos.set(new Vector2D( MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y ) );
+        System.out.println(MouseInfo.getPointerInfo().getLocation().toString() + "     ||      " + m_vPos.toString());
         //update the heading if the player has a non zero velocity
         if (m_vVelocity.LengthSq() > 0.00000001) {
             m_vHeading = Vec2DNormalize(m_vVelocity);
@@ -137,7 +142,7 @@ public class Player extends MovingEntity {
         //EnforceNonPenetrationConstraint(this, World()->Agents());
 
         //treat the screen as a toroid
-        WrapAround(m_vPos, m_pWorld.cxClient(), m_pWorld.cyClient());
+        //WrapAround(m_vPos, m_pWorld.cxClient(), m_pWorld.cyClient());
 
         //update the player's current cell if space partitioning is turned on
         if (Steering().isSpacePartitioningOn()) {
