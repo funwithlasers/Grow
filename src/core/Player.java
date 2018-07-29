@@ -9,6 +9,10 @@ import static common.D2.Vector2D.div;
 import static common.D2.Vector2D.mul;
 
 public class Player extends Enemy {
+
+    private static int score = 0;
+
+
     public Player(GameWorld g) {
         super(
                 g,          //gameworld
@@ -26,11 +30,18 @@ public class Player extends Enemy {
         InitializeBuffer();
     }
 
+    //TODO: look for better way to grow with a Vector2D parameter so it doesn't depend on Scale().x == Scale().y
+    private void grow(double growth){
+        SetScale(Scale().x + growth);
+    }
+
     public void Update(double time_elapsed) {
         //update the time elapsed
         m_dTimeElapsed = time_elapsed;
         Vector2D OldPos = Pos();
         m_vPos = new Vector2D(MouseInfo.getPointerInfo().getLocation().getX(), MouseInfo.getPointerInfo().getLocation().getY() );
+
+
 
         //EnforceNonPenetrationConstraint(this, World()->Agents());
 
