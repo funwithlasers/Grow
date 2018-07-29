@@ -32,15 +32,16 @@ import static common.misc.Stream_Utility_function.ttos;
 import static core.SteeringBehavior.summing_method;
 
 public class GameWorld {
-    //a container of all the moving entities
 
-    private List<Player> m_Players = new ArrayList<Player>(Prm.NumAgents);
+    private Player hero;
+    //a container of all the moving entities
+    private List<Enemy> m_Entities = new ArrayList<Enemy>(Prm.NumAgents);
     //any obstacles
     private List<BaseGameEntity> m_Obstacles = new ArrayList<BaseGameEntity>(Prm.NumObstacles);
     //container containing any walls in the environment
     private List<Wall2D> m_Walls = new ArrayList<Wall2D>();
-    private CellSpacePartition<Player> m_pCellSpace;
-    //any path we may create for the players to follow
+    private CellSpacePartition<Enemy> m_pCellSpace;
+    //any path we may create for the enemys to follow
     private Path m_pPath;
     //set true to pause the motion
     private boolean m_bPaused;
@@ -70,23 +71,23 @@ public class GameWorld {
     //public ~GameWorld();
     // public void  Update(double time_elapsed);
     // public void  Render();
-    public void NonPenetrationContraint(Player v) {
-        EnforceNonPenetrationConstraint(v, m_Players);
+    public void NonPenetrationContraint(Enemy v) {
+        EnforceNonPenetrationConstraint(v, m_Entities);
     }
 
-    public void TagplayersWithinViewRange(BaseGameEntity pplayer, double range) {
-        TagNeighbors(pplayer, m_Players, range);
+    public void TagenemysWithinViewRange(BaseGameEntity penemy, double range) {
+        TagNeighbors(penemy, m_Entities, range);
     }
 
-    public void TagObstaclesWithinViewRange(BaseGameEntity pplayer, double range) {
-        TagNeighbors(pplayer, m_Obstacles, range);
+    public void TagObstaclesWithinViewRange(BaseGameEntity penemy, double range) {
+        TagNeighbors(penemy, m_Obstacles, range);
     }
 
     public List<Wall2D> Walls() {
         return m_Walls;
     }
 
-    public CellSpacePartition<Player> CellSpace() {
+    public CellSpacePartition<Enemy> CellSpace() {
         return m_pCellSpace;
     }
 
@@ -94,8 +95,8 @@ public class GameWorld {
         return m_Obstacles;
     }
 
-    public List<Player> Agents() {
-        return m_Players;
+    public List<Enemy> Agents() {
+        return m_Entities;
     }
 
     //handle WM_COMMAND messages
@@ -200,46 +201,56 @@ public class GameWorld {
         m_bShowCellSpaceInfo = false;
 
         //setup the spatial subdivision class
-        m_pCellSpace = new CellSpacePartition<Player>((double) cx, (double) cy,
+        m_pCellSpace = new CellSpacePartition<Enemy>((double) cx, (double) cy,
                 Prm.NumCellsX, Prm.NumCellsY, Prm.NumAgents);
 
         double border = 30;
         m_pPath = new Path(5, border, border, cx - border, cy - border, true);
 
         BaseGameEntity.resetValidID();
+
+        /**
+         *         ADDING HERO
+         */
+        hero = new Player(this);
+        m_Entities.add(hero);
+
+        /**
+         *          Adding Enemies
+         */
         for (int a = 0; a < Prm.NumAgents; ++a) {
             //determine a random starting position
             Vector2D SpawnPos = new Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
                     cy / 2.0 + RandomClamped() * cy / 2.0);
 
 
-            Player pPlayer = new Player(this,
+            Enemy pEnemy = new Enemy(this,
                     SpawnPos, //initial position
                     RandFloat() * TwoPi, //start rotation
                     new Vector2D(0, 0), //velocity
-                    Prm.PlayerMass, //mass
+                    Prm.EnemyMass, //mass
                     Prm.MaxSteeringForce, //max force
                     Prm.MaxSpeed, //max velocity
                     Prm.MaxTurnRatePerSecond, //max turn rate
-                    Prm.PlayerScale);        //scale
+                    Prm.EnemyScale);        //scale
 
-            pPlayer.Steering().FlockingOn();
+            pEnemy.Steering().PursuitOn(hero);
 
-            m_Players.add(pPlayer);
+            m_Entities.add(pEnemy);
 
             //add it to the cell subdivision
-            m_pCellSpace.AddEntity(pPlayer);
+            m_pCellSpace.AddEntity(pEnemy);
         }
 
         final boolean SHOAL = true;
         if (SHOAL) {
-            m_Players.get(Prm.NumAgents - 1).Steering().FlockingOff();
-            m_Players.get(Prm.NumAgents - 1).SetScale(new Vector2D(10, 10));
-            m_Players.get(Prm.NumAgents - 1).Steering().WanderOn();
-            m_Players.get(Prm.NumAgents - 1).SetMaxSpeed(70);
+            m_Entities.get(Prm.NumAgents - 1).Steering().FlockingOff();
+            m_Entities.get(Prm.NumAgents - 1).SetScale(new Vector2D(10, 10));
+            m_Entities.get(Prm.NumAgents - 1).Steering().WanderOn();
+            m_Entities.get(Prm.NumAgents - 1).SetMaxSpeed(70);
 
             for (int i = 0; i < Prm.NumAgents - 1; ++i) {
-                m_Players.get(i).Steering().EvadeOn(m_Players.get(Prm.NumAgents - 1));
+                m_Entities.get(i).Steering().EvadeOn(m_Entities.get(Prm.NumAgents - 1));
             }
         }
         //create any obstacles or walls
@@ -252,7 +263,7 @@ public class GameWorld {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
-        m_Players.clear();
+        m_Entities.clear();
         m_Obstacles.clear();
 
         m_pCellSpace = null;
@@ -271,9 +282,9 @@ public class GameWorld {
 
         m_dAvFrameTime = FrameRateSmoother.Update(time_elapsed);
 
-        //update the players
-        for (int a = 0; a < m_Players.size(); ++a) {
-            m_Players.get(a).Update(time_elapsed);
+        //update the enemys
+        for (int a = 0; a < m_Entities.size(); ++a) {
+            m_Entities.get(a).Update(time_elapsed);
         }
     }
 
@@ -377,8 +388,8 @@ public class GameWorld {
                 double border = 60;
                 m_pPath = new Path(RandInt(3, 7), border, border, cxClient() - border, cyClient() - border, true);
                 m_bShowPath = true;
-                for (int i = 0; i < m_Players.size(); ++i) {
-                    m_Players.get(i).Steering().SetPath(m_pPath.GetPath());
+                for (int i = 0; i < m_Entities.size(); ++i) {
+                    m_Entities.get(i).Steering().SetPath(m_pPath.GetPath());
                 }
             }
             break;
@@ -396,8 +407,8 @@ public class GameWorld {
 
             case 'i':
             case 'I': {
-                for (int i = 0; i < m_Players.size(); ++i) {
-                    m_Players.get(i).ToggleSmoothing();
+                for (int i = 0; i < m_Entities.size(); ++i) {
+                    m_Entities.get(i).ToggleSmoothing();
                 }
 
             }
@@ -411,14 +422,14 @@ public class GameWorld {
                 if (!m_bShowObstacles) {
                     m_Obstacles.clear();
 
-                    for (int i = 0; i < m_Players.size(); ++i) {
-                        m_Players.get(i).Steering().ObstacleAvoidanceOff();
+                    for (int i = 0; i < m_Entities.size(); ++i) {
+                        m_Entities.get(i).Steering().ObstacleAvoidanceOff();
                     }
                 } else {
                     CreateObstacles();
 
-                    for (int i = 0; i < m_Players.size(); ++i) {
-                        m_Players.get(i).Steering().ObstacleAvoidanceOn();
+                    for (int i = 0; i < m_Entities.size(); ++i) {
+                        m_Entities.get(i).Steering().ObstacleAvoidanceOn();
                     }
                 }
                 break;
@@ -436,8 +447,8 @@ public class GameWorld {
                 if (!m_bShowObstacles) {
                     m_Obstacles.clear();
 
-                    for (int i = 0; i < m_Players.size(); ++i) {
-                        m_Players.get(i).Steering().ObstacleAvoidanceOff();
+                    for (int i = 0; i < m_Entities.size(); ++i) {
+                        m_Entities.get(i).Steering().ObstacleAvoidanceOff();
                     }
 
                     //uncheck the menu
@@ -445,8 +456,8 @@ public class GameWorld {
                 } else {
                     CreateObstacles();
 
-                    for (int i = 0; i < m_Players.size(); ++i) {
-                        m_Players.get(i).Steering().ObstacleAvoidanceOn();
+                    for (int i = 0; i < m_Entities.size(); ++i) {
+                        m_Entities.get(i).Steering().ObstacleAvoidanceOn();
                     }
 
                     //check the menu
@@ -462,8 +473,8 @@ public class GameWorld {
                 if (m_bShowWalls) {
                     CreateWalls();
 
-                    for (int i = 0; i < m_Players.size(); ++i) {
-                        m_Players.get(i).Steering().WallAvoidanceOn();
+                    for (int i = 0; i < m_Entities.size(); ++i) {
+                        m_Entities.get(i).Steering().WallAvoidanceOn();
                     }
 
                     //check the menu
@@ -471,8 +482,8 @@ public class GameWorld {
                 } else {
                     m_Walls.clear();
 
-                    for (int i = 0; i < m_Players.size(); ++i) {
-                        m_Players.get(i).Steering().WallAvoidanceOff();
+                    for (int i = 0; i < m_Entities.size(); ++i) {
+                        m_Entities.get(i).Steering().WallAvoidanceOff();
                     }
 
                     //uncheck the menu
@@ -483,17 +494,17 @@ public class GameWorld {
 
 
             case IDR_PARTITIONING: {
-                for (int i = 0; i < m_Players.size(); ++i) {
-                    m_Players.get(i).Steering().ToggleSpacePartitioningOnOff();
+                for (int i = 0; i < m_Entities.size(); ++i) {
+                    m_Entities.get(i).Steering().ToggleSpacePartitioningOnOff();
                 }
 
                 //if toggled on, empty the cell space and then re-add all the 
-                //players
-                if (m_Players.get(0).Steering().isSpacePartitioningOn()) {
+                //enemys
+                if (m_Entities.get(0).Steering().isSpacePartitioningOn()) {
                     m_pCellSpace.EmptyCells();
 
-                    for (int i = 0; i < m_Players.size(); ++i) {
-                        m_pCellSpace.AddEntity(m_Players.get(i));
+                    for (int i = 0; i < m_Entities.size(); ++i) {
+                        m_pCellSpace.AddEntity(m_Entities.get(i));
                     }
 
                     ChangeMenuState(hwnd, IDR_PARTITIONING, MFS_CHECKED);
@@ -512,7 +523,7 @@ public class GameWorld {
                 if (m_bShowCellSpaceInfo) {
                     ChangeMenuState(hwnd, IDM_PARTITION_VIEW_NEIGHBORS, MFS_CHECKED);
 
-                    if (!m_Players.get(0).Steering().isSpacePartitioningOn()) {
+                    if (!m_Entities.get(0).Steering().isSpacePartitioningOn()) {
                         SendChangeMenuMessage(hwnd, IDR_PARTITIONING);
                     }
                 } else {
@@ -527,8 +538,8 @@ public class GameWorld {
                 ChangeMenuState(hwnd, IDR_PRIORITIZED, MFS_UNCHECKED);
                 ChangeMenuState(hwnd, IDR_DITHERED, MFS_UNCHECKED);
 
-                for (int i = 0; i < m_Players.size(); ++i) {
-                    m_Players.get(i).Steering().SetSummingMethod(SteeringBehavior.summing_method.weighted_average);
+                for (int i = 0; i < m_Entities.size(); ++i) {
+                    m_Entities.get(i).Steering().SetSummingMethod(SteeringBehavior.summing_method.weighted_average);
                 }
             }
 
@@ -539,8 +550,8 @@ public class GameWorld {
                 ChangeMenuState(hwnd, IDR_PRIORITIZED, MFS_CHECKED);
                 ChangeMenuState(hwnd, IDR_DITHERED, MFS_UNCHECKED);
 
-                for (int i = 0; i < m_Players.size(); ++i) {
-                    m_Players.get(i).Steering().SetSummingMethod(summing_method.prioritized);
+                for (int i = 0; i < m_Entities.size(); ++i) {
+                    m_Entities.get(i).Steering().SetSummingMethod(summing_method.prioritized);
                 }
             }
 
@@ -551,8 +562,8 @@ public class GameWorld {
                 ChangeMenuState(hwnd, IDR_PRIORITIZED, MFS_UNCHECKED);
                 ChangeMenuState(hwnd, IDR_DITHERED, MFS_CHECKED);
 
-                for (int i = 0; i < m_Players.size(); ++i) {
-                    m_Players.get(i).Steering().SetSummingMethod(summing_method.dithered);
+                for (int i = 0; i < m_Entities.size(); ++i) {
+                    m_Entities.get(i).Steering().SetSummingMethod(summing_method.dithered);
                 }
             }
 
@@ -574,11 +585,11 @@ public class GameWorld {
             break;
 
             case ID_MENU_SMOOTHING: {
-                for (int i = 0; i < m_Players.size(); ++i) {
-                    m_Players.get(i).ToggleSmoothing();
+                for (int i = 0; i < m_Entities.size(); ++i) {
+                    m_Entities.get(i).ToggleSmoothing();
                 }
 
-                CheckMenuItemAppropriately(hwnd, ID_MENU_SMOOTHING, m_Players.get(0).isSmoothingOn());
+                CheckMenuItemAppropriately(hwnd, ID_MENU_SMOOTHING, m_Entities.get(0).isSmoothingOn());
             }
 
             break;
@@ -605,25 +616,25 @@ public class GameWorld {
         }
 
         //render the agents
-        for (int a = 0; a < m_Players.size(); ++a) {
-            m_Players.get(a).Render(a == 0);
+        for (int a = 0; a < m_Entities.size(); ++a) {
+            m_Entities.get(a).Render(a == 0);
 
             //render cell partitioning stuff
             if (m_bShowCellSpaceInfo && a == 0) {
                 gdi.HollowBrush();
-                InvertedAABBox2D box = new InvertedAABBox2D(sub(m_Players.get(a).Pos(), new Vector2D(Prm.ViewDistance, Prm.ViewDistance)),
-                        add(m_Players.get(a).Pos(), new Vector2D(Prm.ViewDistance, Prm.ViewDistance)));
+                InvertedAABBox2D box = new InvertedAABBox2D(sub(m_Entities.get(a).Pos(), new Vector2D(Prm.ViewDistance, Prm.ViewDistance)),
+                        add(m_Entities.get(a).Pos(), new Vector2D(Prm.ViewDistance, Prm.ViewDistance)));
                 box.Render();
 
                 gdi.RedPen();
 
-                CellSpace().CalculateNeighbors(m_Players.get(a).Pos(), Prm.ViewDistance);
+                CellSpace().CalculateNeighbors(m_Entities.get(a).Pos(), Prm.ViewDistance);
                 for (BaseGameEntity pV = CellSpace().begin(); !CellSpace().end(); pV = CellSpace().next()) {
                     gdi.Circle(pV.Pos(), pV.BRadius());
                 }
 
                 gdi.GreenPen();
-                gdi.Circle(m_Players.get(a).Pos(), Prm.ViewDistance);
+                gdi.Circle(m_Entities.get(a).Pos(), Prm.ViewDistance);
             }
         }
 

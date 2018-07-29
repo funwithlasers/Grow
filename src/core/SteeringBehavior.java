@@ -1,5 +1,5 @@
 /**
- * Desc:   class to encapsulate steering behaviors for a Player
+ * Desc:   class to encapsulate steering behaviors for a Enemy
  * 
  * @author Petr (http://www.sallyx.org/)
  */
@@ -74,13 +74,13 @@ class SteeringBehavior {
         }
     }
     //a pointer to the owner of this instance
-    private Player m_pPlayer;
+    private Enemy m_pEnemy;
     //the steering force created by the combined effect of all
     //the selected behaviors
     private Vector2D m_vSteeringForce = new Vector2D(0, 0);
     //these can be used to keep track of friends, pursuers, or prey
-    private Player m_pTargetAgent1;
-    private Player m_pTargetAgent2;
+    private Enemy m_pTargetAgent1;
+    private Enemy m_pTargetAgent2;
     //the current target
     private Vector2D m_vTarget = new Vector2D(0, 0);
     //length of the 'detection box' utilized in obstacle avoidance
@@ -118,7 +118,7 @@ class SteeringBehavior {
     private double m_dViewDistance;
     //pointer to any current path
     private Path m_pPath;
-    //the distance (squared) a player has to be from a path waypoint before
+    //the distance (squared) a enemy has to be from a path waypoint before
     //it starts seeking to the next waypoint
     private double m_dWaypointSeekDistSq;
     //any offset used for formations or offset pursuit
@@ -126,7 +126,7 @@ class SteeringBehavior {
     //binary flags to indicate whether or not a behavior should be active
     private int m_iFlags;
 
-    //Arrive makes use of these to determine how quickly a player
+    //Arrive makes use of these to determine how quickly a enemy
     //should decelerate to its target
     private enum Deceleration {
 
@@ -156,17 +156,17 @@ class SteeringBehavior {
     /**
      *
      * This function calculates how much of its max steering force the 
-     * player has left to apply and then applies that amount of the
+     * enemy has left to apply and then applies that amount of the
      * force to add.
      */
     private boolean AccumulateForce(Vector2D RunningTot,
             Vector2D ForceToAdd) {
 
-        //calculate how much steering force the player has used so far
+        //calculate how much steering force the enemy has used so far
         double MagnitudeSoFar = RunningTot.Length();
 
-        //calculate how much steering force remains to be used by this player
-        double MagnitudeRemaining = m_pPlayer.MaxForce() - MagnitudeSoFar;
+        //calculate how much steering force remains to be used by this enemy
+        double MagnitudeRemaining = m_pEnemy.MaxForce() - MagnitudeSoFar;
 
         //return false if there is no more force left to use
         if (MagnitudeRemaining <= 0.0) {
@@ -177,7 +177,7 @@ class SteeringBehavior {
         double MagnitudeToAdd = ForceToAdd.Length();
 
         //if the magnitude of the sum of ForceToAdd and the running total
-        //does not exceed the maximum force available to this player, just
+        //does not exceed the maximum force available to this enemy, just
         //add together. Otherwise add as much of the ForceToAdd vector is
         //possible without going over the max.
         if (MagnitudeToAdd < MagnitudeRemaining) {
@@ -196,17 +196,17 @@ class SteeringBehavior {
     private void CreateFeelers() {
         m_Feelers.clear();
         //feeler pointing straight in front
-        m_Feelers.add(add(m_pPlayer.Pos(), mul(m_dWallDetectionFeelerLength, m_pPlayer.Heading())));
+        m_Feelers.add(add(m_pEnemy.Pos(), mul(m_dWallDetectionFeelerLength, m_pEnemy.Heading())));
 
         //feeler to left
-        Vector2D temp = new Vector2D(m_pPlayer.Heading());
+        Vector2D temp = new Vector2D(m_pEnemy.Heading());
         Vec2DRotateAroundOrigin(temp, HalfPi * 3.5f);
-        m_Feelers.add(add(m_pPlayer.Pos(), mul(m_dWallDetectionFeelerLength / 2.0f, temp)));
+        m_Feelers.add(add(m_pEnemy.Pos(), mul(m_dWallDetectionFeelerLength / 2.0f, temp)));
 
         //feeler to right
-        temp = new Vector2D(m_pPlayer.Heading());
+        temp = new Vector2D(m_pEnemy.Heading());
         Vec2DRotateAroundOrigin(temp, HalfPi * 0.5f);
-        m_Feelers.add(add(m_pPlayer.Pos(), mul(m_dWallDetectionFeelerLength / 2.0f, temp)));
+        m_Feelers.add(add(m_pEnemy.Pos(), mul(m_dWallDetectionFeelerLength / 2.0f, temp)));
     }
 
 /////////////////////////////////////////////////////////////////////////////// START OF BEHAVIORS
@@ -215,10 +215,10 @@ class SteeringBehavior {
      *  direct the agent towards the target
      */
     private Vector2D Seek(Vector2D TargetPos) {
-        Vector2D DesiredVelocity = mul(Vec2DNormalize(sub(TargetPos, m_pPlayer.Pos())),
-                m_pPlayer.MaxSpeed());
+        Vector2D DesiredVelocity = mul(Vec2DNormalize(sub(TargetPos, m_pEnemy.Pos())),
+                m_pEnemy.MaxSpeed());
 
-        return sub(DesiredVelocity, m_pPlayer.Velocity());
+        return sub(DesiredVelocity, m_pEnemy.Velocity());
     }
 
     /**
@@ -228,16 +228,16 @@ class SteeringBehavior {
         //only flee if the target is within 'panic distance'. Work in distance
         //squared space.
  /* const double PanicDistanceSq = 100.0f * 100.0;
-        if (Vec2DDistanceSq(m_pPlayer.Pos(), target) > PanicDistanceSq)
+        if (Vec2DDistanceSq(m_pEnemy.Pos(), target) > PanicDistanceSq)
         {
         return new Vector2D(0,0);
         }
          */
 
-        Vector2D DesiredVelocity = mul(Vec2DNormalize(sub(m_pPlayer.Pos(), TargetPos)),
-                m_pPlayer.MaxSpeed());
+        Vector2D DesiredVelocity = mul(Vec2DNormalize(sub(m_pEnemy.Pos(), TargetPos)),
+                m_pEnemy.MaxSpeed());
 
-        return sub(DesiredVelocity, m_pPlayer.Velocity());
+        return sub(DesiredVelocity, m_pEnemy.Velocity());
     }
 
     /**
@@ -245,7 +245,7 @@ class SteeringBehavior {
      *  target with a zero velocity
      */
     private Vector2D Arrive(Vector2D TargetPos, Deceleration deceleration) {
-        Vector2D ToTarget = sub(TargetPos, m_pPlayer.Pos());
+        Vector2D ToTarget = sub(TargetPos, m_pEnemy.Pos());
 
         //calculate the distance to the target
         double dist = ToTarget.Length();
@@ -260,14 +260,14 @@ class SteeringBehavior {
             double speed = dist / ((double) deceleration.value() * DecelerationTweaker);
 
             //make sure the velocity does not exceed the max
-            speed = Math.min(speed, m_pPlayer.MaxSpeed());
+            speed = Math.min(speed, m_pEnemy.MaxSpeed());
 
             //from here proceed just like Seek except we don't need to normalize 
             //the ToTarget vector because we have already gone to the trouble
             //of calculating its length: dist. 
             Vector2D DesiredVelocity = mul(ToTarget, speed / dist);
 
-            return sub(DesiredVelocity, m_pPlayer.Velocity());
+            return sub(DesiredVelocity, m_pEnemy.Velocity());
         }
 
         return new Vector2D(0, 0);
@@ -277,14 +277,14 @@ class SteeringBehavior {
      *  this behavior creates a force that steers the agent towards the 
      *  evader
      */
-    private Vector2D Pursuit(final Player evader) {
+    private Vector2D Pursuit(final Enemy evader) {
         //if the evader is ahead and facing the agent then we can just seek
         //for the evader's current position.
-        Vector2D ToEvader = sub(evader.Pos(), m_pPlayer.Pos());
+        Vector2D ToEvader = sub(evader.Pos(), m_pEnemy.Pos());
 
-        double RelativeHeading = m_pPlayer.Heading().Dot(evader.Heading());
+        double RelativeHeading = m_pEnemy.Heading().Dot(evader.Heading());
 
-        if ((ToEvader.Dot(m_pPlayer.Heading()) > 0)
+        if ((ToEvader.Dot(m_pEnemy.Heading()) > 0)
                 && (RelativeHeading < -0.95)) //acos(0.95)=18 degs
         {
             return Seek(evader.Pos());
@@ -296,7 +296,7 @@ class SteeringBehavior {
         //and the pursuer; and is inversely proportional to the sum of the
         //agent's velocities
         double LookAheadTime = ToEvader.Length()
-                / (m_pPlayer.MaxSpeed() + evader.Speed());
+                / (m_pEnemy.MaxSpeed() + evader.Speed());
 
         //now seek to the predicted future position of the evader
         return Seek(add(evader.Pos(), mul(evader.Velocity(), LookAheadTime)));
@@ -306,10 +306,10 @@ class SteeringBehavior {
      *  similar to pursuit except the agent Flees from the estimated future
      *  position of the pursuer
      */
-    private Vector2D Evade(final Player pursuer) {
+    private Vector2D Evade(final Enemy pursuer) {
         // Not necessary to include the check for facing direction this time
 
-        Vector2D ToPursuer = sub(pursuer.Pos(), m_pPlayer.Pos());
+        Vector2D ToPursuer = sub(pursuer.Pos(), m_pEnemy.Pos());
 
         //uncomment the following two lines to have Evade only consider pursuers 
         //within a 'threat range'
@@ -322,7 +322,7 @@ class SteeringBehavior {
         //and the pursuer; and is inversely proportional to the sum of the
         //agents' velocities
         double LookAheadTime = ToPursuer.Length()
-                / (m_pPlayer.MaxSpeed() + pursuer.Speed());
+                / (m_pEnemy.MaxSpeed() + pursuer.Speed());
 
         //now flee away from predicted future position of the pursuer
         return Flee(add(pursuer.Pos(), mul(pursuer.Velocity(), LookAheadTime)));
@@ -334,7 +334,7 @@ class SteeringBehavior {
     private Vector2D Wander() {
         //this behavior is dependent on the update rate, so this line must
         //be included when using time independent framerate.
-        double JitterThisTimeSlice = m_dWanderJitter * m_pPlayer.getTimeElapsed();
+        double JitterThisTimeSlice = m_dWanderJitter * m_pEnemy.getTimeElapsed();
 
         //first, add a small random vector to the target's position
         m_vWanderTarget.add(new Vector2D(RandomClamped() * JitterThisTimeSlice,
@@ -352,12 +352,12 @@ class SteeringBehavior {
 
         //project the target into world space
         Vector2D Target = PointToWorldSpace(target,
-                m_pPlayer.Heading(),
-                m_pPlayer.Side(),
-                m_pPlayer.Pos());
+                m_pEnemy.Heading(),
+                m_pEnemy.Side(),
+                m_pEnemy.Pos());
 
         //and steer towards it
-        return sub(Target, m_pPlayer.Pos());
+        return sub(Target, m_pEnemy.Pos());
     }
 
     /**
@@ -367,11 +367,11 @@ class SteeringBehavior {
     private Vector2D ObstacleAvoidance(List<BaseGameEntity> obstacles) {
         //the detection box length is proportional to the agent's velocity
         m_dDBoxLength = Prm.MinDetectionBoxLength
-                + (m_pPlayer.Speed() / m_pPlayer.MaxSpeed())
+                + (m_pEnemy.Speed() / m_pEnemy.MaxSpeed())
                 * Prm.MinDetectionBoxLength;
 
         //tag all obstacles within range of the box for processing
-        m_pPlayer.World().TagObstaclesWithinViewRange(m_pPlayer, m_dDBoxLength);
+        m_pEnemy.World().TagObstaclesWithinViewRange(m_pEnemy, m_dDBoxLength);
 
         //this will keep track of the closest intersecting obstacle (CIB)
         BaseGameEntity ClosestIntersectingObstacle = null;
@@ -390,9 +390,9 @@ class SteeringBehavior {
             if (curOb.IsTagged()) {
                 //calculate this obstacle's position in local space
                 Vector2D LocalPos = PointToLocalSpace(curOb.Pos(),
-                        m_pPlayer.Heading(),
-                        m_pPlayer.Side(),
-                        m_pPlayer.Pos());
+                        m_pEnemy.Heading(),
+                        m_pEnemy.Side(),
+                        m_pEnemy.Pos());
 
                 //if the local position has a negative x value then it must lay
                 //behind the agent. (in which case it can be ignored)
@@ -400,7 +400,7 @@ class SteeringBehavior {
                     //if the distance from the x axis to the object's position is less
                     //than its radius + half the width of the detection box then there
                     //is a potential intersection.
-                    double ExpandedRadius = curOb.BRadius() + m_pPlayer.BRadius();
+                    double ExpandedRadius = curOb.BRadius() + m_pEnemy.BRadius();
 
                     if (Math.abs(LocalPos.y) < ExpandedRadius) {
                         //now to do a line/circle intersection test. The center of the 
@@ -449,7 +449,7 @@ class SteeringBehavior {
                     - LocalPosOfClosestObstacle.y) * multiplier;
 
             //apply a braking force proportional to the obstacles distance from
-            //the player. 
+            //the enemy.
             final double BrakingWeight = 0.2;
 
             SteeringForce.x = (ClosestIntersectingObstacle.BRadius()
@@ -459,8 +459,8 @@ class SteeringBehavior {
 
         //finally, convert the steering vector from local to world space
         return VectorToWorldSpace(SteeringForce,
-                m_pPlayer.Heading(),
-                m_pPlayer.Side());
+                m_pEnemy.Heading(),
+                m_pEnemy.Side());
     }
 
     /**
@@ -486,7 +486,7 @@ class SteeringBehavior {
             //run through each wall checking for any intersection points
             DoubleRef DistToThisIPRef = new DoubleRef(DistToThisIP);
             for (int w = 0; w < walls.size(); ++w) {
-                if (LineIntersection2D(m_pPlayer.Pos(),
+                if (LineIntersection2D(m_pEnemy.Pos(),
                         m_Feelers.get(flr),
                         walls.get(w).From(),
                         walls.get(w).To(),
@@ -525,16 +525,16 @@ class SteeringBehavior {
     /**
      * this calculates a force repelling from the other neighbors
      */
-    Vector2D Separation(final List<Player> neighbors) {
+    Vector2D Separation(final List<Enemy> neighbors) {
         Vector2D SteeringForce = new Vector2D();
 
         for (int a = 0; a < neighbors.size(); ++a) {
             //make sure this agent isn't included in the calculations and that
             //the agent being examined is close enough. ***also make sure it doesn't
             //include the evade target ***
-            if ((neighbors.get(a) != m_pPlayer) && neighbors.get(a).IsTagged()
+            if ((neighbors.get(a) != m_pEnemy) && neighbors.get(a).IsTagged()
                     && (neighbors.get(a) != m_pTargetAgent1)) {
-                Vector2D ToAgent = sub(m_pPlayer.Pos(), neighbors.get(a).Pos());
+                Vector2D ToAgent = sub(m_pEnemy.Pos(), neighbors.get(a).Pos());
 
                 //scale the force inversely proportional to the agents distance  
                 //from its neighbor.
@@ -549,19 +549,19 @@ class SteeringBehavior {
      * returns a force that attempts to align this agents heading with that
      * of its neighbors
      */
-    private Vector2D Alignment(final List<Player> neighbors) {
+    private Vector2D Alignment(final List<Enemy> neighbors) {
         //used to record the average heading of the neighbors
         Vector2D AverageHeading = new Vector2D();
 
-        //used to count the number of players in the neighborhood
+        //used to count the number of enemys in the neighborhood
         int NeighborCount = 0;
 
-        //iterate through all the tagged players and sum their heading vectors  
+        //iterate through all the tagged enemys and sum their heading vectors
         for (int a = 0; a < neighbors.size(); ++a) {
             //make sure *this* agent isn't included in the calculations and that
             //the agent being examined  is close enough ***also make sure it doesn't
             //include any evade target ***
-            if ((neighbors.get(a) != m_pPlayer) && neighbors.get(a).IsTagged()
+            if ((neighbors.get(a) != m_pEnemy) && neighbors.get(a).IsTagged()
                     && (neighbors.get(a) != m_pTargetAgent1)) {
                 AverageHeading.add(neighbors.get(a).Heading());
 
@@ -569,11 +569,11 @@ class SteeringBehavior {
             }
         }
 
-        //if the neighborhood contained one or more players, average their
+        //if the neighborhood contained one or more enemys, average their
         //heading vectors.
         if (NeighborCount > 0) {
             AverageHeading.div((double) NeighborCount);
-            AverageHeading.sub(m_pPlayer.Heading());
+            AverageHeading.sub(m_pEnemy.Heading());
         }
 
         return AverageHeading;
@@ -583,7 +583,7 @@ class SteeringBehavior {
      * returns a steering force that attempts to move the agent towards the
      * center of mass of the agents in its immediate area
      */
-    private Vector2D Cohesion(final List<Player> neighbors) {
+    private Vector2D Cohesion(final List<Enemy> neighbors) {
         //first find the center of mass of all the agents
         Vector2D CenterOfMass = new Vector2D(), SteeringForce = new Vector2D();
 
@@ -594,7 +594,7 @@ class SteeringBehavior {
             //make sure *this* agent isn't included in the calculations and that
             //the agent being examined is close enough ***also make sure it doesn't
             //include the evade target ***
-            if ((neighbors.get(a) != m_pPlayer) && neighbors.get(a).IsTagged()
+            if ((neighbors.get(a) != m_pEnemy) && neighbors.get(a).IsTagged()
                     && (neighbors.get(a) != m_pTargetAgent1)) {
                 CenterOfMass.add(neighbors.get(a).Pos());
 
@@ -623,17 +623,17 @@ class SteeringBehavior {
      *
      * USES SPACIAL PARTITIONING
      */
-    private Vector2D SeparationPlus(final List<Player> neighbors) {
+    private Vector2D SeparationPlus(final List<Enemy> neighbors) {
         Vector2D SteeringForce = new Vector2D();
 
         //iterate through the neighbors and sum up all the position vectors
-        for (BaseGameEntity pV = m_pPlayer.World().CellSpace().begin();
-             !m_pPlayer.World().CellSpace().end();
-             pV = m_pPlayer.World().CellSpace().next()) {
+        for (BaseGameEntity pV = m_pEnemy.World().CellSpace().begin();
+             !m_pEnemy.World().CellSpace().end();
+             pV = m_pEnemy.World().CellSpace().next()) {
             //make sure this agent isn't included in the calculations and that
             //the agent being examined is close enough
-            if (pV != m_pPlayer) {
-                Vector2D ToAgent = sub(m_pPlayer.Pos(), pV.Pos());
+            if (pV != m_pEnemy) {
+                Vector2D ToAgent = sub(m_pEnemy.Pos(), pV.Pos());
 
                 //scale the force inversely proportional to the agents distance  
                 //from its neighbor.
@@ -651,30 +651,30 @@ class SteeringBehavior {
      *
      *  USES SPACIAL PARTITIONING
      */
-    private Vector2D AlignmentPlus(final List<Player> neighbors) {
+    private Vector2D AlignmentPlus(final List<Enemy> neighbors) {
         //This will record the average heading of the neighbors
         Vector2D AverageHeading = new Vector2D();
 
-        //This count the number of players in the neighborhood
+        //This count the number of enemys in the neighborhood
         double NeighborCount = 0.0;
 
         //iterate through the neighbors and sum up all the position vectors
-        for (MovingEntity pV = m_pPlayer.World().CellSpace().begin();
-             !m_pPlayer.World().CellSpace().end();
-             pV = m_pPlayer.World().CellSpace().next()) {
+        for (MovingEntity pV = m_pEnemy.World().CellSpace().begin();
+             !m_pEnemy.World().CellSpace().end();
+             pV = m_pEnemy.World().CellSpace().next()) {
             //make sure *this* agent isn't included in the calculations and that
             //the agent being examined  is close enough
-            if (pV != m_pPlayer) {
+            if (pV != m_pEnemy) {
                 AverageHeading.add(pV.Heading());
                 ++NeighborCount;
             }
         }
 
-        //if the neighborhood contained one or more players, average their
+        //if the neighborhood contained one or more enemys, average their
         //heading vectors.
         if (NeighborCount > 0.0) {
             AverageHeading.div(NeighborCount);
-            AverageHeading.sub(m_pPlayer.Heading());
+            AverageHeading.sub(m_pEnemy.Heading());
         }
 
         return AverageHeading;
@@ -686,19 +686,19 @@ class SteeringBehavior {
      *
      * USES SPACIAL PARTITIONING
      */
-    private Vector2D CohesionPlus(final List<Player> neighbors) {
+    private Vector2D CohesionPlus(final List<Enemy> neighbors) {
         //first find the center of mass of all the agents
         Vector2D CenterOfMass = new Vector2D(), SteeringForce = new Vector2D();
 
         int NeighborCount = 0;
 
         //iterate through the neighbors and sum up all the position vectors
-        for (BaseGameEntity pV = m_pPlayer.World().CellSpace().begin();
-             !m_pPlayer.World().CellSpace().end();
-             pV = m_pPlayer.World().CellSpace().next()) {
+        for (BaseGameEntity pV = m_pEnemy.World().CellSpace().begin();
+             !m_pEnemy.World().CellSpace().end();
+             pV = m_pEnemy.World().CellSpace().next()) {
             //make sure *this* agent isn't included in the calculations and that
             //the agent being examined is close enough
-            if (pV != m_pPlayer) {
+            if (pV != m_pEnemy) {
                 CenterOfMass.add(pV.Pos());
 
                 ++NeighborCount;
@@ -720,16 +720,16 @@ class SteeringBehavior {
 
     /**
      * Given two agents, this method returns a force that attempts to 
-     * position the player between them
+     * position the enemy between them
      */
-    private Vector2D Interpose(final Player AgentA, final Player AgentB) {
+    private Vector2D Interpose(final Enemy AgentA, final Enemy AgentB) {
         //first we need to figure out where the two agents are going to be at 
         //time T in the future. This is approximated by determining the time
         //taken to reach the mid way point at the current time at at max speed.
         Vector2D MidPoint = div(add(AgentA.Pos(), AgentB.Pos()), 2.0);
 
-        double TimeToReachMidPoint = Vec2DDistance(m_pPlayer.Pos(), MidPoint)
-                / m_pPlayer.MaxSpeed();
+        double TimeToReachMidPoint = Vec2DDistance(m_pEnemy.Pos(), MidPoint)
+                / m_pEnemy.MaxSpeed();
 
         //now we have T, we assume that agent A and agent B will continue on a
         //straight trajectory and extrapolate to get their future positions
@@ -743,7 +743,7 @@ class SteeringBehavior {
         return Arrive(MidPoint, Deceleration.fast);
     }
 
-    private Vector2D Hide(final Player hunter, final List<BaseGameEntity> obstacles) {
+    private Vector2D Hide(final Enemy hunter, final List<BaseGameEntity> obstacles) {
         double DistToClosest = MaxDouble;
         Vector2D BestHidingSpot = new Vector2D();
 
@@ -759,7 +759,7 @@ class SteeringBehavior {
 
             //work in distance-squared space to find the closest hiding
             //spot to the agent
-            double dist = Vec2DDistanceSq(HidingSpot, m_pPlayer.Pos());
+            double dist = Vec2DDistanceSq(HidingSpot, m_pEnemy.Pos());
 
             if (dist < DistToClosest) {
                 DistToClosest = dist;
@@ -809,7 +809,7 @@ class SteeringBehavior {
     private Vector2D FollowPath() {
         //move to next target if close enough to current target (working in
         //distance squared space)
-        if (Vec2DDistanceSq(m_pPath.CurrentWaypoint(), m_pPlayer.Pos())
+        if (Vec2DDistanceSq(m_pPath.CurrentWaypoint(), m_pEnemy.Pos())
                 < m_dWaypointSeekDistSq) {
             m_pPath.SetNextWaypoint();
         }
@@ -822,10 +822,10 @@ class SteeringBehavior {
     }
 
     /**
-     * Produces a steering force that keeps a player at a specified offset
-     * from a leader player
+     * Produces a steering force that keeps a enemy at a specified offset
+     * from a leader enemy
      */
-    private Vector2D OffsetPursuit(final Player leader,
+    private Vector2D OffsetPursuit(final Enemy leader,
             final Vector2D offset) {
         //calculate the offset's position in world space
         Vector2D WorldOffsetPos = PointToWorldSpace(offset,
@@ -833,13 +833,13 @@ class SteeringBehavior {
                 leader.Side(),
                 leader.Pos());
 
-        Vector2D ToOffset = sub(WorldOffsetPos, m_pPlayer.Pos());
+        Vector2D ToOffset = sub(WorldOffsetPos, m_pEnemy.Pos());
 
         //the lookahead time is propotional to the distance between the leader
         //and the pursuer; and is inversely proportional to the sum of both
         //agent's velocities
         double LookAheadTime = ToOffset.Length()
-                / (m_pPlayer.MaxSpeed() + leader.Speed());
+                / (m_pEnemy.MaxSpeed() + leader.Speed());
 
         //now Arrive at the predicted future position of the offset
         return Arrive(add(WorldOffsetPos, mul(leader.Velocity(), LookAheadTime)), Deceleration.fast);
@@ -848,9 +848,9 @@ class SteeringBehavior {
 //------------------------- ctor -----------------------------------------
 //
 //------------------------------------------------------------------------
-    public SteeringBehavior(Player agent) {
+    public SteeringBehavior(Enemy agent) {
 
-        m_pPlayer = agent;
+        m_pEnemy = agent;
         m_iFlags = 0;
         m_dDBoxLength = Prm.MinDetectionBoxLength;
         m_dWeightCohesion = Prm.CohesionWeight;
@@ -914,86 +914,86 @@ class SteeringBehavior {
         int SlotSize = 20;
 
         if (KEYDOWN(KeyEvent.VK_INSERT)) {
-            m_pPlayer.SetMaxForce(m_pPlayer.MaxForce() + 1000.0f * m_pPlayer.getTimeElapsed());
+            m_pEnemy.SetMaxForce(m_pEnemy.MaxForce() + 1000.0f * m_pEnemy.getTimeElapsed());
         }
         if (KEYDOWN(KeyEvent.VK_DELETE)) {
-            if (m_pPlayer.MaxForce() > 0.2f) {
-                m_pPlayer.SetMaxForce(m_pPlayer.MaxForce() - 1000.0f * m_pPlayer.getTimeElapsed());
+            if (m_pEnemy.MaxForce() > 0.2f) {
+                m_pEnemy.SetMaxForce(m_pEnemy.MaxForce() - 1000.0f * m_pEnemy.getTimeElapsed());
             }
         }
         if (KEYDOWN(KeyEvent.VK_HOME)) {
-            m_pPlayer.SetMaxSpeed(m_pPlayer.MaxSpeed() + 50.0f * m_pPlayer.getTimeElapsed());
+            m_pEnemy.SetMaxSpeed(m_pEnemy.MaxSpeed() + 50.0f * m_pEnemy.getTimeElapsed());
         }
         if (KEYDOWN(KeyEvent.VK_END)) {
-            if (m_pPlayer.MaxSpeed() > 0.2f) {
-                m_pPlayer.SetMaxSpeed(m_pPlayer.MaxSpeed() - 50.0f * m_pPlayer.getTimeElapsed());
+            if (m_pEnemy.MaxSpeed() > 0.2f) {
+                m_pEnemy.SetMaxSpeed(m_pEnemy.MaxSpeed() - 50.0f * m_pEnemy.getTimeElapsed());
             }
         }
 
-        if (m_pPlayer.MaxForce() < 0) {
-            m_pPlayer.SetMaxForce(0.0f);
+        if (m_pEnemy.MaxForce() < 0) {
+            m_pEnemy.SetMaxForce(0.0f);
         }
-        if (m_pPlayer.MaxSpeed() < 0) {
-            m_pPlayer.SetMaxSpeed(0.0f);
+        if (m_pEnemy.MaxSpeed() < 0) {
+            m_pEnemy.SetMaxSpeed(0.0f);
         }
         
-        if (m_pPlayer.ID() == 0) {
+        if (m_pEnemy.ID() == 0) {
             gdi.TextAtPos(5, NextSlot, "MaxForce(Ins/Del):");
-            gdi.TextAtPos(160, NextSlot, ttos(m_pPlayer.MaxForce() / Prm.SteeringForceTweaker));
+            gdi.TextAtPos(160, NextSlot, ttos(m_pEnemy.MaxForce() / Prm.SteeringForceTweaker));
             NextSlot += SlotSize;
         }
-        if (m_pPlayer.ID() == 0) {
+        if (m_pEnemy.ID() == 0) {
             gdi.TextAtPos(5, NextSlot, "MaxSpeed(Home/End):");
-            gdi.TextAtPos(160, NextSlot, ttos(m_pPlayer.MaxSpeed()));
+            gdi.TextAtPos(160, NextSlot, ttos(m_pEnemy.MaxSpeed()));
             NextSlot += SlotSize;
         }
 
         //render the steering force
-        if (m_pPlayer.World().RenderSteeringForce()) {
+        if (m_pEnemy.World().RenderSteeringForce()) {
             gdi.RedPen();
-            Vector2D F = mul((div(m_vSteeringForce, Prm.SteeringForceTweaker)), Prm.PlayerScale);
-            gdi.Line(m_pPlayer.Pos(), add(m_pPlayer.Pos(), F));
+            Vector2D F = mul((div(m_vSteeringForce, Prm.SteeringForceTweaker)), Prm.EnemyScale);
+            gdi.Line(m_pEnemy.Pos(), add(m_pEnemy.Pos(), F));
         }
 
         //render wander stuff if relevant
-        if (On(behavior_type.wander) && m_pPlayer.World().RenderWanderCircle()) {
+        if (On(behavior_type.wander) && m_pEnemy.World().RenderWanderCircle()) {
 
             if (KEYDOWN('F')) {
-                m_dWanderJitter += 1.0f * m_pPlayer.getTimeElapsed();
+                m_dWanderJitter += 1.0f * m_pEnemy.getTimeElapsed();
                 m_dWanderJitter = clamp(m_dWanderJitter, 0.0, 100.0);
             }
             if (KEYDOWN('V')) {
-                m_dWanderJitter -= 1.0f * m_pPlayer.getTimeElapsed();
+                m_dWanderJitter -= 1.0f * m_pEnemy.getTimeElapsed();
                 m_dWanderJitter = clamp(m_dWanderJitter, 0.0, 100.0);
             }
             if (KEYDOWN('G')) {
-                m_dWanderDistance += 2.0f * m_pPlayer.getTimeElapsed();
+                m_dWanderDistance += 2.0f * m_pEnemy.getTimeElapsed();
                 m_dWanderDistance = clamp(m_dWanderDistance, 0.0, 50.0);
             }
             if (KEYDOWN('B')) {
-                m_dWanderDistance -= 2.0f * m_pPlayer.getTimeElapsed();
+                m_dWanderDistance -= 2.0f * m_pEnemy.getTimeElapsed();
                 m_dWanderDistance = clamp(m_dWanderDistance, 0.0, 50.0);
             }
             if (KEYDOWN('H')) {
-                m_dWanderRadius += 2.0f * m_pPlayer.getTimeElapsed();
+                m_dWanderRadius += 2.0f * m_pEnemy.getTimeElapsed();
                 m_dWanderRadius = clamp(m_dWanderRadius, 0.0, 100.0);
             }
             if (KEYDOWN('N')) {
-                m_dWanderRadius -= 2.0f * m_pPlayer.getTimeElapsed();
+                m_dWanderRadius -= 2.0f * m_pEnemy.getTimeElapsed();
                 m_dWanderRadius = clamp(m_dWanderRadius, 0.0, 100.0);
             }
 
-            if (m_pPlayer.ID() == 0) {
+            if (m_pEnemy.ID() == 0) {
                 gdi.TextAtPos(5, NextSlot, "Jitter(F/V): ");
                 gdi.TextAtPos(160, NextSlot, ttos(m_dWanderJitter));
                 NextSlot += SlotSize;
             }
-            if (m_pPlayer.ID() == 0) {
+            if (m_pEnemy.ID() == 0) {
                 gdi.TextAtPos(5, NextSlot, "Distance(G/B): ");
                 gdi.TextAtPos(160, NextSlot, ttos(m_dWanderDistance));
                 NextSlot += SlotSize;
             }
-            if (m_pPlayer.ID() == 0) {
+            if (m_pEnemy.ID() == 0) {
                 gdi.TextAtPos(5, NextSlot, "Radius(H/N): ");
                 gdi.TextAtPos(160, NextSlot, ttos(m_dWanderRadius));
                 NextSlot += SlotSize;
@@ -1001,46 +1001,46 @@ class SteeringBehavior {
 
 
             //calculate the center of the wander circle
-            Vector2D m_vTCC = PointToWorldSpace(new Vector2D(m_dWanderDistance * m_pPlayer.BRadius(), 0),
-                    m_pPlayer.Heading(),
-                    m_pPlayer.Side(),
-                    m_pPlayer.Pos());
+            Vector2D m_vTCC = PointToWorldSpace(new Vector2D(m_dWanderDistance * m_pEnemy.BRadius(), 0),
+                    m_pEnemy.Heading(),
+                    m_pEnemy.Side(),
+                    m_pEnemy.Pos());
             //draw the wander circle
             gdi.GreenPen();
             gdi.HollowBrush();
-            gdi.Circle(m_vTCC, m_dWanderRadius * m_pPlayer.BRadius());
+            gdi.Circle(m_vTCC, m_dWanderRadius * m_pEnemy.BRadius());
 
             //draw the wander target
             gdi.RedPen();
-            gdi.Circle(PointToWorldSpace(mul(add(m_vWanderTarget, new Vector2D(m_dWanderDistance, 0)), m_pPlayer.BRadius()),
-                    m_pPlayer.Heading(),
-                    m_pPlayer.Side(),
-                    m_pPlayer.Pos()), 3);
+            gdi.Circle(PointToWorldSpace(mul(add(m_vWanderTarget, new Vector2D(m_dWanderDistance, 0)), m_pEnemy.BRadius()),
+                    m_pEnemy.Heading(),
+                    m_pEnemy.Side(),
+                    m_pEnemy.Pos()), 3);
         }
 
         //render the detection box if relevant
-        if (m_pPlayer.World().RenderDetectionBox()) {
+        if (m_pEnemy.World().RenderDetectionBox()) {
 
             gdi.GreyPen();
 
 
             double length = Prm.MinDetectionBoxLength
-                    + (m_pPlayer.Speed() / m_pPlayer.MaxSpeed())
+                    + (m_pEnemy.Speed() / m_pEnemy.MaxSpeed())
                     * Prm.MinDetectionBoxLength;
 
             //verts for the detection box buffer
             box.clear();
-            box.add(new Vector2D(0, m_pPlayer.BRadius()));
-            box.add(new Vector2D(length, m_pPlayer.BRadius()));
-            box.add(new Vector2D(length, -m_pPlayer.BRadius()));
-            box.add(new Vector2D(0, -m_pPlayer.BRadius()));
+            box.add(new Vector2D(0, m_pEnemy.BRadius()));
+            box.add(new Vector2D(length, m_pEnemy.BRadius()));
+            box.add(new Vector2D(length, -m_pEnemy.BRadius()));
+            box.add(new Vector2D(0, -m_pEnemy.BRadius()));
 
 
-            if (!m_pPlayer.isSmoothingOn()) {
-                box = WorldTransform(box, m_pPlayer.Pos(), m_pPlayer.Heading(), m_pPlayer.Side());
+            if (!m_pEnemy.isSmoothingOn()) {
+                box = WorldTransform(box, m_pEnemy.Pos(), m_pEnemy.Heading(), m_pEnemy.Side());
                 gdi.ClosedShape(box);
             } else {
-                box = WorldTransform(box, m_pPlayer.Pos(), m_pPlayer.SmoothedHeading(), m_pPlayer.SmoothedHeading().Perp());
+                box = WorldTransform(box, m_pEnemy.Pos(), m_pEnemy.SmoothedHeading(), m_pEnemy.SmoothedHeading().Perp());
                 gdi.ClosedShape(box);
             }
 
@@ -1048,11 +1048,11 @@ class SteeringBehavior {
             //////////////////////////////////////////////////////////////////////////
             //the detection box length is proportional to the agent's velocity
             m_dDBoxLength = Prm.MinDetectionBoxLength
-                    + (m_pPlayer.Speed() / m_pPlayer.MaxSpeed())
+                    + (m_pEnemy.Speed() / m_pEnemy.MaxSpeed())
                     * Prm.MinDetectionBoxLength;
 
             //tag all obstacles within range of the box for processing
-            m_pPlayer.World().TagObstaclesWithinViewRange(m_pPlayer, m_dDBoxLength);
+            m_pEnemy.World().TagObstaclesWithinViewRange(m_pEnemy, m_dDBoxLength);
 
             //this will keep track of the closest intersecting obstacle (CIB)
             BaseGameEntity ClosestIntersectingObstacle = null;
@@ -1063,7 +1063,7 @@ class SteeringBehavior {
             //this will record the transformed local coordinates of the CIB
             Vector2D LocalPosOfClosestObstacle = new Vector2D();
 
-            ListIterator<BaseGameEntity> it = m_pPlayer.World().Obstacles().listIterator();
+            ListIterator<BaseGameEntity> it = m_pEnemy.World().Obstacles().listIterator();
 
             while (it.hasNext()) {
                 BaseGameEntity curOb = it.next();
@@ -1071,9 +1071,9 @@ class SteeringBehavior {
                 if (curOb.IsTagged()) {
                     //calculate this obstacle's position in local space
                     Vector2D LocalPos = PointToLocalSpace(curOb.Pos(),
-                            m_pPlayer.Heading(),
-                            m_pPlayer.Side(),
-                            m_pPlayer.Pos());
+                            m_pEnemy.Heading(),
+                            m_pEnemy.Side(),
+                            m_pEnemy.Pos());
 
                     //if the local position has a negative x value then it must lay
                     //behind the agent. (in which case it can be ignored)
@@ -1081,7 +1081,7 @@ class SteeringBehavior {
                         //if the distance from the x axis to the object's position is less
                         //than its radius + half the width of the detection box then there
                         //is a potential intersection.
-                        if (Math.abs(LocalPos.y) < (curOb.BRadius() + m_pPlayer.BRadius())) {
+                        if (Math.abs(LocalPos.y) < (curOb.BRadius() + m_pEnemy.BRadius())) {
                             gdi.ThickRedPen();
                             gdi.ClosedShape(box);
                         }
@@ -1094,75 +1094,75 @@ class SteeringBehavior {
         }
 
         //render the wall avoidnace feelers
-        if (On(behavior_type.wall_avoidance) && m_pPlayer.World().RenderFeelers()) {
+        if (On(behavior_type.wall_avoidance) && m_pEnemy.World().RenderFeelers()) {
             gdi.OrangePen();
 
             for (int flr = 0; flr < m_Feelers.size(); ++flr) {
 
-                gdi.Line(m_pPlayer.Pos(), m_Feelers.get(flr));
+                gdi.Line(m_pEnemy.Pos(), m_Feelers.get(flr));
             }
         }
 
         //render path info
-        if (On(behavior_type.follow_path) && m_pPlayer.World().RenderPath()) {
+        if (On(behavior_type.follow_path) && m_pEnemy.World().RenderPath()) {
             m_pPath.Render();
         }
 
 
         if (On(behavior_type.separation)) {
-            if (m_pPlayer.ID() == 0) {
+            if (m_pEnemy.ID() == 0) {
                 gdi.TextAtPos(5, NextSlot, "Separation(S/X):");
                 gdi.TextAtPos(160, NextSlot, ttos(m_dWeightSeparation / Prm.SteeringForceTweaker));
                 NextSlot += SlotSize;
             }
             if (KEYDOWN('S')) {
-                m_dWeightSeparation += 200 * m_pPlayer.getTimeElapsed();
+                m_dWeightSeparation += 200 * m_pEnemy.getTimeElapsed();
                 m_dWeightSeparation = clamp(m_dWeightSeparation, 0.0, 50.0 * Prm.SteeringForceTweaker);
             }
             if (KEYDOWN('X')) {
-                m_dWeightSeparation -= 200 * m_pPlayer.getTimeElapsed();
+                m_dWeightSeparation -= 200 * m_pEnemy.getTimeElapsed();
                 m_dWeightSeparation = clamp(m_dWeightSeparation, 0.0, 50.0 * Prm.SteeringForceTweaker);
             }
         }
 
         if (On(behavior_type.allignment)) {
-            if (m_pPlayer.ID() == 0) {
+            if (m_pEnemy.ID() == 0) {
                 gdi.TextAtPos(5, NextSlot, "Alignment(A/Z):");
                 gdi.TextAtPos(160, NextSlot, ttos(m_dWeightAlignment / Prm.SteeringForceTweaker));
                 NextSlot += SlotSize;
             }
 
             if (KEYDOWN('A')) {
-                m_dWeightAlignment += 200 * m_pPlayer.getTimeElapsed();
+                m_dWeightAlignment += 200 * m_pEnemy.getTimeElapsed();
                 m_dWeightAlignment = clamp(m_dWeightAlignment, 0.0, 50.0 * Prm.SteeringForceTweaker);
             }
             if (KEYDOWN('Z')) {
-                m_dWeightAlignment -= 200 * m_pPlayer.getTimeElapsed();
+                m_dWeightAlignment -= 200 * m_pEnemy.getTimeElapsed();
                 m_dWeightAlignment = clamp(m_dWeightAlignment, 0.0, 50.0 * Prm.SteeringForceTweaker);
             }
 
         }
 
         if (On(behavior_type.cohesion)) {
-            if (m_pPlayer.ID() == 0) {
+            if (m_pEnemy.ID() == 0) {
                 gdi.TextAtPos(5, NextSlot, "Cohesion(D/C):");
                 gdi.TextAtPos(160, NextSlot, ttos(m_dWeightCohesion / Prm.SteeringForceTweaker));
                 NextSlot += SlotSize;
             }
 
             if (KEYDOWN('D')) {
-                m_dWeightCohesion += 200 * m_pPlayer.getTimeElapsed();
+                m_dWeightCohesion += 200 * m_pEnemy.getTimeElapsed();
                 m_dWeightCohesion = clamp(m_dWeightCohesion, 0.0, 50.0 * Prm.SteeringForceTweaker);
             }
             if (KEYDOWN('C')) {
-                m_dWeightCohesion -= 200 * m_pPlayer.getTimeElapsed();
+                m_dWeightCohesion -= 200 * m_pEnemy.getTimeElapsed();
                 m_dWeightCohesion = clamp(m_dWeightCohesion, 0.0, 50.0 * Prm.SteeringForceTweaker);
             }
         }
 
         if (On(behavior_type.follow_path)) {
             double sd = Math.sqrt(m_dWaypointSeekDistSq);
-            if (m_pPlayer.ID() == 0) {
+            if (m_pEnemy.ID() == 0) {
                 gdi.TextAtPos(5, NextSlot, "SeekDistance(D/C):");
                 gdi.TextAtPos(160, NextSlot, ttos(sd));
                 NextSlot += SlotSize;
@@ -1187,18 +1187,18 @@ class SteeringBehavior {
         //reset the steering force
         m_vSteeringForce.Zero();
 
-        //use space partitioning to calculate the neighbours of this player
+        //use space partitioning to calculate the neighbours of this enemy
         //if switched on. If not, use the standard tagging system
         if (!isSpacePartitioningOn()) {
             //tag neighbors if any of the following 3 group behaviors are switched on
             if (On(behavior_type.separation) || On(behavior_type.allignment) || On(behavior_type.cohesion)) {
-                m_pPlayer.World().TagplayersWithinViewRange(m_pPlayer, m_dViewDistance);
+                m_pEnemy.World().TagenemysWithinViewRange(m_pEnemy, m_dViewDistance);
             }
         } else {
             //calculate neighbours in cell-space if any of the following 3 group
             //behaviors are switched on
             if (On(behavior_type.separation) || On(behavior_type.allignment) || On(behavior_type.cohesion)) {
-                m_pPlayer.World().CellSpace().CalculateNeighbors(m_pPlayer.Pos(), m_dViewDistance);
+                m_pEnemy.World().CellSpace().CalculateNeighbors(m_pEnemy.Pos(), m_dViewDistance);
             }
         }
 
@@ -1231,14 +1231,14 @@ class SteeringBehavior {
      * returns the forward component of the steering force
      */
     public double ForwardComponent() {
-        return m_pPlayer.Heading().Dot(m_vSteeringForce);
+        return m_pEnemy.Heading().Dot(m_vSteeringForce);
     }
 
     /**
      * returns the side component of the steering force
      */
     public double SideComponent() {
-        return m_pPlayer.Side().Dot(m_vSteeringForce);
+        return m_pEnemy.Side().Dot(m_vSteeringForce);
     }
 
     /**
@@ -1251,7 +1251,7 @@ class SteeringBehavior {
         Vector2D force = new Vector2D();
 
         if (On(behavior_type.wall_avoidance)) {
-            force = mul(WallAvoidance(m_pPlayer.World().Walls()),
+            force = mul(WallAvoidance(m_pEnemy.World().Walls()),
                     m_dWeightWallAvoidance);
 
             if (!AccumulateForce(m_vSteeringForce, force)) {
@@ -1260,7 +1260,7 @@ class SteeringBehavior {
         }
 
         if (On(behavior_type.obstacle_avoidance)) {
-            force = mul(ObstacleAvoidance(m_pPlayer.World().Obstacles()),
+            force = mul(ObstacleAvoidance(m_pEnemy.World().Obstacles()),
                     m_dWeightObstacleAvoidance);
 
             if (!AccumulateForce(m_vSteeringForce, force)) {
@@ -1280,7 +1280,7 @@ class SteeringBehavior {
 
 
         if (On(behavior_type.flee)) {
-            force = mul(Flee(m_pPlayer.World().Crosshair()), m_dWeightFlee);
+            force = mul(Flee(m_pEnemy.World().Crosshair()), m_dWeightFlee);
 
             if (!AccumulateForce(m_vSteeringForce, force)) {
                 return m_vSteeringForce;
@@ -1292,7 +1292,7 @@ class SteeringBehavior {
         //also a good behavior to add into this mix)
         if (!isSpacePartitioningOn()) {
             if (On(behavior_type.separation)) {
-                force = mul(Separation(m_pPlayer.World().Agents()), m_dWeightSeparation);
+                force = mul(Separation(m_pEnemy.World().Agents()), m_dWeightSeparation);
 
                 if (!AccumulateForce(m_vSteeringForce, force)) {
                     return m_vSteeringForce;
@@ -1300,7 +1300,7 @@ class SteeringBehavior {
             }
 
             if (On(behavior_type.allignment)) {
-                force = mul(Alignment(m_pPlayer.World().Agents()), m_dWeightAlignment);
+                force = mul(Alignment(m_pEnemy.World().Agents()), m_dWeightAlignment);
 
                 if (!AccumulateForce(m_vSteeringForce, force)) {
                     return m_vSteeringForce;
@@ -1308,7 +1308,7 @@ class SteeringBehavior {
             }
 
             if (On(behavior_type.cohesion)) {
-                force = mul(Cohesion(m_pPlayer.World().Agents()), m_dWeightCohesion);
+                force = mul(Cohesion(m_pEnemy.World().Agents()), m_dWeightCohesion);
 
                 if (!AccumulateForce(m_vSteeringForce, force)) {
                     return m_vSteeringForce;
@@ -1317,7 +1317,7 @@ class SteeringBehavior {
         } else {
 
             if (On(behavior_type.separation)) {
-                force = mul(SeparationPlus(m_pPlayer.World().Agents()), m_dWeightSeparation);
+                force = mul(SeparationPlus(m_pEnemy.World().Agents()), m_dWeightSeparation);
 
                 if (!AccumulateForce(m_vSteeringForce, force)) {
                     return m_vSteeringForce;
@@ -1325,7 +1325,7 @@ class SteeringBehavior {
             }
 
             if (On(behavior_type.allignment)) {
-                force = mul(AlignmentPlus(m_pPlayer.World().Agents()), m_dWeightAlignment);
+                force = mul(AlignmentPlus(m_pEnemy.World().Agents()), m_dWeightAlignment);
 
                 if (!AccumulateForce(m_vSteeringForce, force)) {
                     return m_vSteeringForce;
@@ -1333,7 +1333,7 @@ class SteeringBehavior {
             }
 
             if (On(behavior_type.cohesion)) {
-                force = mul(CohesionPlus(m_pPlayer.World().Agents()), m_dWeightCohesion);
+                force = mul(CohesionPlus(m_pEnemy.World().Agents()), m_dWeightCohesion);
 
                 if (!AccumulateForce(m_vSteeringForce, force)) {
                     return m_vSteeringForce;
@@ -1342,7 +1342,7 @@ class SteeringBehavior {
         }
 
         if (On(behavior_type.seek)) {
-            force = mul(Seek(m_pPlayer.World().Crosshair()), m_dWeightSeek);
+            force = mul(Seek(m_pEnemy.World().Crosshair()), m_dWeightSeek);
 
             if (!AccumulateForce(m_vSteeringForce, force)) {
                 return m_vSteeringForce;
@@ -1351,7 +1351,7 @@ class SteeringBehavior {
 
 
         if (On(behavior_type.arrive)) {
-            force = mul(Arrive(m_pPlayer.World().Crosshair(), m_Deceleration), m_dWeightArrive);
+            force = mul(Arrive(m_pEnemy.World().Crosshair(), m_Deceleration), m_dWeightArrive);
 
             if (!AccumulateForce(m_vSteeringForce, force)) {
                 return m_vSteeringForce;
@@ -1400,7 +1400,7 @@ class SteeringBehavior {
         if (On(behavior_type.hide)) {
             assert m_pTargetAgent1 != null : "Hide target not assigned";
 
-            force = mul(Hide(m_pTargetAgent1, m_pPlayer.World().Obstacles()), m_dWeightHide);
+            force = mul(Hide(m_pTargetAgent1, m_pEnemy.World().Obstacles()), m_dWeightHide);
 
             if (!AccumulateForce(m_vSteeringForce, force)) {
                 return m_vSteeringForce;
@@ -1426,12 +1426,12 @@ class SteeringBehavior {
      */
     private Vector2D CalculateWeightedSum() {
         if (On(behavior_type.wall_avoidance)) {
-            m_vSteeringForce.add(mul(WallAvoidance(m_pPlayer.World().Walls()),
+            m_vSteeringForce.add(mul(WallAvoidance(m_pEnemy.World().Walls()),
                     m_dWeightWallAvoidance));
         }
 
         if (On(behavior_type.obstacle_avoidance)) {
-            m_vSteeringForce.add(mul(ObstacleAvoidance(m_pPlayer.World().Obstacles()),
+            m_vSteeringForce.add(mul(ObstacleAvoidance(m_pEnemy.World().Obstacles()),
                     m_dWeightObstacleAvoidance));
         }
 
@@ -1446,27 +1446,27 @@ class SteeringBehavior {
         //also a good behavior to add into this mix)
         if (!isSpacePartitioningOn()) {
             if (On(behavior_type.separation)) {
-                m_vSteeringForce.add(mul(Separation(m_pPlayer.World().Agents()), m_dWeightSeparation));
+                m_vSteeringForce.add(mul(Separation(m_pEnemy.World().Agents()), m_dWeightSeparation));
             }
 
             if (On(behavior_type.allignment)) {
-                m_vSteeringForce.add(mul(Alignment(m_pPlayer.World().Agents()), m_dWeightAlignment));
+                m_vSteeringForce.add(mul(Alignment(m_pEnemy.World().Agents()), m_dWeightAlignment));
             }
 
             if (On(behavior_type.cohesion)) {
-                m_vSteeringForce.add(mul(Cohesion(m_pPlayer.World().Agents()), m_dWeightCohesion));
+                m_vSteeringForce.add(mul(Cohesion(m_pEnemy.World().Agents()), m_dWeightCohesion));
             }
         } else {
             if (On(behavior_type.separation)) {
-                m_vSteeringForce.add(mul(SeparationPlus(m_pPlayer.World().Agents()), m_dWeightSeparation));
+                m_vSteeringForce.add(mul(SeparationPlus(m_pEnemy.World().Agents()), m_dWeightSeparation));
             }
 
             if (On(behavior_type.allignment)) {
-                m_vSteeringForce.add(mul(AlignmentPlus(m_pPlayer.World().Agents()), m_dWeightAlignment));
+                m_vSteeringForce.add(mul(AlignmentPlus(m_pEnemy.World().Agents()), m_dWeightAlignment));
             }
 
             if (On(behavior_type.cohesion)) {
-                m_vSteeringForce.add(mul(CohesionPlus(m_pPlayer.World().Agents()), m_dWeightCohesion));
+                m_vSteeringForce.add(mul(CohesionPlus(m_pEnemy.World().Agents()), m_dWeightCohesion));
             }
         }
 
@@ -1476,15 +1476,15 @@ class SteeringBehavior {
         }
 
         if (On(behavior_type.seek)) {
-            m_vSteeringForce.add(mul(Seek(m_pPlayer.World().Crosshair()), m_dWeightSeek));
+            m_vSteeringForce.add(mul(Seek(m_pEnemy.World().Crosshair()), m_dWeightSeek));
         }
 
         if (On(behavior_type.flee)) {
-            m_vSteeringForce.add(mul(Flee(m_pPlayer.World().Crosshair()), m_dWeightFlee));
+            m_vSteeringForce.add(mul(Flee(m_pEnemy.World().Crosshair()), m_dWeightFlee));
         }
 
         if (On(behavior_type.arrive)) {
-            m_vSteeringForce.add(mul(Arrive(m_pPlayer.World().Crosshair(), m_Deceleration), m_dWeightArrive));
+            m_vSteeringForce.add(mul(Arrive(m_pEnemy.World().Crosshair(), m_Deceleration), m_dWeightArrive));
         }
 
         if (On(behavior_type.pursuit)) {
@@ -1509,14 +1509,14 @@ class SteeringBehavior {
         if (On(behavior_type.hide)) {
             assert m_pTargetAgent1 != null : "Hide target not assigned";
 
-            m_vSteeringForce.add(mul(Hide(m_pTargetAgent1, m_pPlayer.World().Obstacles()), m_dWeightHide));
+            m_vSteeringForce.add(mul(Hide(m_pTargetAgent1, m_pEnemy.World().Obstacles()), m_dWeightHide));
         }
 
         if (On(behavior_type.follow_path)) {
             m_vSteeringForce.add(mul(FollowPath(), m_dWeightFollowPath));
         }
 
-        m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+        m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
         return m_vSteeringForce;
     }
@@ -1537,22 +1537,22 @@ class SteeringBehavior {
         m_vSteeringForce.Zero();
 
         if (On(behavior_type.wall_avoidance) && RandFloat() < Prm.prWallAvoidance) {
-            m_vSteeringForce = mul(WallAvoidance(m_pPlayer.World().Walls()),
+            m_vSteeringForce = mul(WallAvoidance(m_pEnemy.World().Walls()),
                     m_dWeightWallAvoidance / Prm.prWallAvoidance);
 
             if (!m_vSteeringForce.isZero()) {
-                m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                 return m_vSteeringForce;
             }
         }
 
         if (On(behavior_type.obstacle_avoidance) && RandFloat() < Prm.prObstacleAvoidance) {
-            m_vSteeringForce.add(mul(ObstacleAvoidance(m_pPlayer.World().Obstacles()),
+            m_vSteeringForce.add(mul(ObstacleAvoidance(m_pEnemy.World().Obstacles()),
                     m_dWeightObstacleAvoidance / Prm.prObstacleAvoidance));
 
             if (!m_vSteeringForce.isZero()) {
-                m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                 return m_vSteeringForce;
             }
@@ -1560,22 +1560,22 @@ class SteeringBehavior {
 
         if (!isSpacePartitioningOn()) {
             if (On(behavior_type.separation) && RandFloat() < Prm.prSeparation) {
-                m_vSteeringForce.add(mul(Separation(m_pPlayer.World().Agents()),
+                m_vSteeringForce.add(mul(Separation(m_pEnemy.World().Agents()),
                         m_dWeightSeparation / Prm.prSeparation));
 
                 if (!m_vSteeringForce.isZero()) {
-                    m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                    m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                     return m_vSteeringForce;
                 }
             }
         } else {
             if (On(behavior_type.separation) && RandFloat() < Prm.prSeparation) {
-                m_vSteeringForce.add(mul(SeparationPlus(m_pPlayer.World().Agents()),
+                m_vSteeringForce.add(mul(SeparationPlus(m_pEnemy.World().Agents()),
                         m_dWeightSeparation / Prm.prSeparation));
 
                 if (!m_vSteeringForce.isZero()) {
-                    m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                    m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                     return m_vSteeringForce;
                 }
@@ -1584,10 +1584,10 @@ class SteeringBehavior {
 
 
         if (On(behavior_type.flee) && RandFloat() < Prm.prFlee) {
-            m_vSteeringForce.add(mul(Flee(m_pPlayer.World().Crosshair()), m_dWeightFlee / Prm.prFlee));
+            m_vSteeringForce.add(mul(Flee(m_pEnemy.World().Crosshair()), m_dWeightFlee / Prm.prFlee));
 
             if (!m_vSteeringForce.isZero()) {
-                m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                 return m_vSteeringForce;
             }
@@ -1599,7 +1599,7 @@ class SteeringBehavior {
             m_vSteeringForce.add(mul(Evade(m_pTargetAgent1), m_dWeightEvade / Prm.prEvade));
 
             if (!m_vSteeringForce.isZero()) {
-                m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                 return m_vSteeringForce;
             }
@@ -1608,44 +1608,44 @@ class SteeringBehavior {
 
         if (!isSpacePartitioningOn()) {
             if (On(behavior_type.allignment) && RandFloat() < Prm.prAlignment) {
-                m_vSteeringForce.add(mul(Alignment(m_pPlayer.World().Agents()),
+                m_vSteeringForce.add(mul(Alignment(m_pEnemy.World().Agents()),
                         m_dWeightAlignment / Prm.prAlignment));
 
                 if (!m_vSteeringForce.isZero()) {
-                    m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                    m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                     return m_vSteeringForce;
                 }
             }
 
             if (On(behavior_type.cohesion) && RandFloat() < Prm.prCohesion) {
-                m_vSteeringForce.add(mul(Cohesion(m_pPlayer.World().Agents()),
+                m_vSteeringForce.add(mul(Cohesion(m_pEnemy.World().Agents()),
                         m_dWeightCohesion / Prm.prCohesion));
 
                 if (!m_vSteeringForce.isZero()) {
-                    m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                    m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                     return m_vSteeringForce;
                 }
             }
         } else {
             if (On(behavior_type.allignment) && RandFloat() < Prm.prAlignment) {
-                m_vSteeringForce.add(mul(AlignmentPlus(m_pPlayer.World().Agents()),
+                m_vSteeringForce.add(mul(AlignmentPlus(m_pEnemy.World().Agents()),
                         m_dWeightAlignment / Prm.prAlignment));
 
                 if (!m_vSteeringForce.isZero()) {
-                    m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                    m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                     return m_vSteeringForce;
                 }
             }
 
             if (On(behavior_type.cohesion) && RandFloat() < Prm.prCohesion) {
-                m_vSteeringForce.add(mul(CohesionPlus(m_pPlayer.World().Agents()),
+                m_vSteeringForce.add(mul(CohesionPlus(m_pEnemy.World().Agents()),
                         m_dWeightCohesion / Prm.prCohesion));
 
                 if (!m_vSteeringForce.isZero()) {
-                    m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                    m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                     return m_vSteeringForce;
                 }
@@ -1656,28 +1656,28 @@ class SteeringBehavior {
             m_vSteeringForce.add(mul(Wander(), m_dWeightWander / Prm.prWander));
 
             if (!m_vSteeringForce.isZero()) {
-                m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                 return m_vSteeringForce;
             }
         }
 
         if (On(behavior_type.seek) && RandFloat() < Prm.prSeek) {
-            m_vSteeringForce.add(mul(Seek(m_pPlayer.World().Crosshair()), m_dWeightSeek / Prm.prSeek));
+            m_vSteeringForce.add(mul(Seek(m_pEnemy.World().Crosshair()), m_dWeightSeek / Prm.prSeek));
 
             if (!m_vSteeringForce.isZero()) {
-                m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                 return m_vSteeringForce;
             }
         }
 
         if (On(behavior_type.arrive) && RandFloat() < Prm.prArrive) {
-            m_vSteeringForce.add(mul(Arrive(m_pPlayer.World().Crosshair(), m_Deceleration),
+            m_vSteeringForce.add(mul(Arrive(m_pEnemy.World().Crosshair(), m_Deceleration),
                     m_dWeightArrive / Prm.prArrive));
 
             if (!m_vSteeringForce.isZero()) {
-                m_vSteeringForce.Truncate(m_pPlayer.MaxForce());
+                m_vSteeringForce.Truncate(m_pEnemy.MaxForce());
 
                 return m_vSteeringForce;
             }
@@ -1690,11 +1690,11 @@ class SteeringBehavior {
         m_vTarget = new Vector2D(t);
     }
 
-    public void SetTargetAgent1(Player Agent) {
+    public void SetTargetAgent1(Enemy Agent) {
         m_pTargetAgent1 = Agent;
     }
 
-    public void SetTargetAgent2(Player Agent) {
+    public void SetTargetAgent2(Enemy Agent) {
         m_pTargetAgent2 = Agent;
     }
 
@@ -1746,12 +1746,12 @@ class SteeringBehavior {
         m_iFlags |= behavior_type.wander.flag();
     }
 
-    public void PursuitOn(Player v) {
+    public void PursuitOn(Enemy v) {
         m_iFlags |= behavior_type.pursuit.flag();
         m_pTargetAgent1 = v;
     }
 
-    public void EvadeOn(Player v) {
+    public void EvadeOn(Enemy v) {
         m_iFlags |= behavior_type.evade.flag();
         m_pTargetAgent1 = v;
     }
@@ -1780,18 +1780,18 @@ class SteeringBehavior {
         m_iFlags |= behavior_type.follow_path.flag();
     }
 
-    public void InterposeOn(Player v1, Player v2) {
+    public void InterposeOn(Enemy v1, Enemy v2) {
         m_iFlags |= behavior_type.interpose.flag();
         m_pTargetAgent1 = v1;
         m_pTargetAgent2 = v2;
     }
 
-    public void HideOn(Player v) {
+    public void HideOn(Enemy v) {
         m_iFlags |= behavior_type.hide.flag();
         m_pTargetAgent1 = v;
     }
 
-    public void OffsetPursuitOn(Player v1, final Vector2D offset) {
+    public void OffsetPursuitOn(Enemy v1, final Vector2D offset) {
         m_iFlags |= behavior_type.offset_pursuit.flag();
         m_vOffset = offset;
         m_pTargetAgent1 = v1;

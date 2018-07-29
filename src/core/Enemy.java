@@ -1,5 +1,5 @@
 /** 
- *  Desc:   Definition of a simple player that uses steering behaviors
+ *  Desc:   Definition of a simple enemy that uses steering behaviors
  * 
  * @author Petr (http://www.sallyx.org/)
  */
@@ -15,51 +15,51 @@ import static common.misc.Cgdi.gdi;
 import static core.ParamLoader.Prm;
 import static common.D2.Transformation.*;
 
-public class Player extends MovingEntity {
+public class Enemy extends MovingEntity {
 
-    //a pointer to the world data. So a player can access any obstacle,
+    //a pointer to the world data. So a enemy can access any obstacle,
     //path, wall or agent data
-    private GameWorld m_pWorld;
+    protected GameWorld m_pWorld;
     //the steering behavior class
     private SteeringBehavior m_pSteering;
     //some steering behaviors give jerky looking movement. The
-    //following members are used to smooth the player's heading
+    //following members are used to smooth the enemy's heading
     private SmootherV2<Vector2D> m_pHeadingSmoother;
-    //this vector represents the average of the player's heading
+    //this vector represents the average of the enemy's heading
     //vector smoothed over the last few frames
     private Vector2D m_vSmoothedHeading;
     //when true, smoothing is active
     private boolean m_bSmoothingOn;
     //keeps a track of the most recent update time. (some of the
     //steering behaviors make use of this - see Wander)
-    private double m_dTimeElapsed;
-    //buffer for the player shape
-    private List<Vector2D> m_vecplayerVB = new ArrayList<Vector2D>();
+    protected double m_dTimeElapsed;
+    //buffer for the enemy shape
+    private List<Vector2D> m_vecenemyVB = new ArrayList<Vector2D>();
 
     /**
-     *  fills the player's shape buffer with its vertices
+     *  fills the enemy's shape buffer with its vertices
      */
-    private void InitializeBuffer() {
-        final int NumplayerVerts = 3;
+    protected void InitializeBuffer() {
+        final int NumenemyVerts = 3;
 
-        Vector2D player[] = {new Vector2D(-1.0f, 0.6f),
+        Vector2D enemy[] = {new Vector2D(-1.0f, 0.6f),
             new Vector2D(1.0f, 0.0f),
             new Vector2D(-1.0f, -0.6f)};
 
         //setup the vertex buffers and calculate the bounding radius
-        for (int vtx = 0; vtx < NumplayerVerts; ++vtx) {
-            m_vecplayerVB.add(player[vtx]);
+        for (int vtx = 0; vtx < NumenemyVerts; ++vtx) {
+            m_vecenemyVB.add(enemy[vtx]);
         }
     }
 
-    //disallow the copying of Player types
-    //private Player(Player v) { }
+    //disallow the copying of Enemy types
+    //private Enemy(Enemy v) { }
     @Override
     protected Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException("Cloning not allowed");
     }
 
-    public Player(GameWorld world,
+    public Enemy(GameWorld world,
                   Vector2D position,
                   double rotation,
                   Vector2D velocity,
@@ -100,7 +100,7 @@ public class Player extends MovingEntity {
     }
 
     /**
-    *  Updates the player's position and orientation from a series of steering behaviors
+    *  Updates the enemy's position and orientation from a series of steering behaviors
     */
     public void Update(double time_elapsed) {
         //update the time elapsed
@@ -109,11 +109,11 @@ public class Player extends MovingEntity {
         //keep a record of its old position so we can update its cell later
         //in this method
         Vector2D OldPos = Pos();
-/**
+
         Vector2D SteeringForce;
 
         //calculate the combined force from each steering behavior in the 
-        //player's list
+        //enemy's list
         SteeringForce = m_pSteering.Calculate();
 
         //Acceleration = Force/Mass
@@ -122,17 +122,13 @@ public class Player extends MovingEntity {
         //update velocity
         m_vVelocity.add(mul(acceleration, time_elapsed));
 
-        //make sure player does not exceed maximum velocity
+        //make sure enemy does not exceed maximum velocity
         m_vVelocity.Truncate(m_dMaxSpeed);
 
         //update the position
         m_vPos.add(mul(m_vVelocity, time_elapsed));
-**/
 
-       // m_vPos.set(new Vector2D(  , MouseInfo.getPointerInfo().getLocation().y ) );
-        m_vPos.set(new Vector2D( MouseInfo.getPointerInfo().getLocation().x, MouseInfo.getPointerInfo().getLocation().y ) );
-        System.out.println(MouseInfo.getPointerInfo().getLocation().toString() + "     ||      " + m_vPos.toString());
-        //update the heading if the player has a non zero velocity
+        //update the heading if the enemy has a non zero velocity
         if (m_vVelocity.LengthSq() > 0.00000001) {
             m_vHeading = Vec2DNormalize(m_vVelocity);
 
@@ -144,7 +140,7 @@ public class Player extends MovingEntity {
         //treat the screen as a toroid
         //WrapAround(m_vPos, m_pWorld.cxClient(), m_pWorld.cyClient());
 
-        //update the player's current cell if space partitioning is turned on
+        //update the enemy's current cell if space partitioning is turned on
         if (Steering().isSpacePartitioningOn()) {
             World().CellSpace().UpdateEntity(this, OldPos);
         }
@@ -158,7 +154,7 @@ public class Player extends MovingEntity {
 
     public void Render(boolean pr) {
 
-        //render neighboring players in different colors if requested
+        //render neighboring enemys in different colors if requested
         if (m_pWorld.RenderNeighbors()) {
             if (ID() == 0) {
                 gdi.RedPen();
@@ -180,22 +176,22 @@ public class Player extends MovingEntity {
         }
 
         //a vector to hold the transformed vertices
-        List<Vector2D> m_vecplayerVBTrans;
+        List<Vector2D> m_vecenemyVBTrans;
 
         if (isSmoothingOn()) {
-            m_vecplayerVBTrans = WorldTransform(m_vecplayerVB,
+            m_vecenemyVBTrans = WorldTransform(m_vecenemyVB,
                     Pos(),
                     SmoothedHeading(),
                     SmoothedHeading().Perp(),
                     Scale());
         } else {
-            m_vecplayerVBTrans = WorldTransform(m_vecplayerVB,
+            m_vecenemyVBTrans = WorldTransform(m_vecenemyVB,
                     Pos(),
                     Heading(),
                     Side(),
                     Scale());
         }
-        gdi.ClosedShape(m_vecplayerVBTrans);
+        gdi.ClosedShape(m_vecenemyVBTrans);
 
         //render any visual aids / and or user options
         if (m_pWorld.ViewKeys()) {
