@@ -15,6 +15,8 @@ import common.misc.Cgdi;
 import java.util.ArrayList;
 import common.D2.Vector2D;
 import static common.D2.Vector2D.*;
+
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.ListIterator;
 import common.D2.Wall2D;
@@ -33,15 +35,15 @@ import static core.SteeringBehavior.summing_method;
 
 public class GameWorld {
 
-    private Player hero;
+    public static Player pHero;
     //a container of all the moving entities
-    private List<Enemy> m_Entities = new ArrayList<Enemy>(Prm.NumAgents);
+    private List<Sprite> m_Entities = new ArrayList<Sprite>(Prm.NumAgents);
     //any obstacles
     private List<BaseGameEntity> m_Obstacles = new ArrayList<BaseGameEntity>(Prm.NumObstacles);
     //container containing any walls in the environment
     private List<Wall2D> m_Walls = new ArrayList<Wall2D>();
-    private CellSpacePartition<Enemy> m_pCellSpace;
-    //any path we may create for the enemys to follow
+    private CellSpacePartition<Sprite> m_pCellSpace;
+    //any path we may create for the sprites to follow
     private Path m_pPath;
     //set true to pause the motion
     private boolean m_bPaused;
@@ -71,23 +73,23 @@ public class GameWorld {
     //public ~GameWorld();
     // public void  Update(double time_elapsed);
     // public void  Render();
-    public void NonPenetrationContraint(Enemy v) {
+    public void NonPenetrationContraint(Sprite v) {
         EnforceNonPenetrationConstraint(v, m_Entities);
     }
 
-    public void TagenemysWithinViewRange(BaseGameEntity penemy, double range) {
-        TagNeighbors(penemy, m_Entities, range);
+    public void TagspritesWithinViewRange(BaseGameEntity psprite, double range) {
+        TagNeighbors(psprite, m_Entities, range);
     }
 
-    public void TagObstaclesWithinViewRange(BaseGameEntity penemy, double range) {
-        TagNeighbors(penemy, m_Obstacles, range);
+    public void TagObstaclesWithinViewRange(BaseGameEntity psprite, double range) {
+        TagNeighbors(psprite, m_Obstacles, range);
     }
 
     public List<Wall2D> Walls() {
         return m_Walls;
     }
 
-    public CellSpacePartition<Enemy> CellSpace() {
+    public CellSpacePartition<Sprite> CellSpace() {
         return m_pCellSpace;
     }
 
@@ -95,7 +97,7 @@ public class GameWorld {
         return m_Obstacles;
     }
 
-    public List<Enemy> Agents() {
+    public List<Sprite> Agents() {
         return m_Entities;
     }
 
@@ -201,7 +203,7 @@ public class GameWorld {
         m_bShowCellSpaceInfo = false;
 
         //setup the spatial subdivision class
-        m_pCellSpace = new CellSpacePartition<Enemy>((double) cx, (double) cy,
+        m_pCellSpace = new CellSpacePartition<Sprite>((double) cx, (double) cy,
                 Prm.NumCellsX, Prm.NumCellsY, Prm.NumAgents);
 
         double border = 30;
@@ -212,8 +214,8 @@ public class GameWorld {
         /**
          *         ADDING HERO
          */
-        hero = new Player(this);
-        m_Entities.add(hero);
+        pHero = new Player(this);
+        m_Entities.add(pHero);
 
         /**
          *          Adding Enemies
@@ -223,23 +225,26 @@ public class GameWorld {
             Vector2D SpawnPos = new Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
                     cy / 2.0 + RandomClamped() * cy / 2.0);
 
-
-            Enemy pEnemy = new Enemy(this,
+        /**
+            Sprite pSprite = new Sprite(this,
                     SpawnPos, //initial position
                     RandFloat() * TwoPi, //start rotation
                     new Vector2D(0, 0), //velocity
-                    Prm.EnemyMass, //mass
+                    Prm.SpriteMass, //mass
                     Prm.MaxSteeringForce, //max force
                     Prm.MaxSpeed, //max velocity
                     Prm.MaxTurnRatePerSecond, //max turn rate
-                    Prm.EnemyScale);        //scale
+                    Prm.SpriteScale);        //scale
 
-            pEnemy.Steering().PursuitOn(hero);
+         **/
+        Sprite pSprite = null;
+        if(a % 2 == 0) pSprite = new Enemy(this, SpawnPos, Prm.SpriteScale);
+        else pSprite = new Enemy(this, SpawnPos, 30);
 
-            m_Entities.add(pEnemy);
+            m_Entities.add(pSprite);
 
             //add it to the cell subdivision
-            m_pCellSpace.AddEntity(pEnemy);
+            m_pCellSpace.AddEntity(pSprite);
         }
 
         final boolean SHOAL = true;
@@ -282,7 +287,7 @@ public class GameWorld {
 
         m_dAvFrameTime = FrameRateSmoother.Update(time_elapsed);
 
-        //update the enemys
+        //update the sprites
         for (int a = 0; a < m_Entities.size(); ++a) {
             m_Entities.get(a).Update(time_elapsed);
         }
@@ -499,7 +504,7 @@ public class GameWorld {
                 }
 
                 //if toggled on, empty the cell space and then re-add all the 
-                //enemys
+                //sprites
                 if (m_Entities.get(0).Steering().isSpacePartitioningOn()) {
                     m_pCellSpace.EmptyCells();
 

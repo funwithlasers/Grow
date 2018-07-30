@@ -37,8 +37,8 @@ public class ParamLoader extends iniFileLoaderBase {
         SteeringForceTweaker = GetNextParameterFloat();
         MaxSteeringForce = GetNextParameterFloat() * SteeringForceTweaker;
         MaxSpeed = GetNextParameterFloat();
-        EnemyMass = GetNextParameterFloat();
-        EnemyScale = GetNextParameterFloat();
+        SpriteMass = GetNextParameterFloat();
+        SpriteScale = GetNextParameterFloat();
 
         SeparationWeight = GetNextParameterFloat() * SteeringForceTweaker;
         AlignmentWeight = GetNextParameterFloat() * SteeringForceTweaker;
@@ -90,8 +90,8 @@ public class ParamLoader extends iniFileLoaderBase {
     public double SteeringForceTweaker;
     public double MaxSteeringForce;
     public double MaxSpeed;
-    public double EnemyMass;
-    public double EnemyScale;
+    public double SpriteMass;
+    public double SpriteScale;
     public double MaxTurnRatePerSecond;
     public double SeparationWeight;
     public double AlignmentWeight;

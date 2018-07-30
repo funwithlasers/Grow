@@ -28,7 +28,7 @@ public class MovingEntity extends BaseGameEntity {
     //the maximum force this entity can produce to power itself 
     //(think rockets and thrust)
     protected double m_dMaxForce;
-    //the maximum rate (radians per second)this enemy can rotate
+    //the maximum rate (radians per second)this sprite can rotate
     protected double m_dMaxTurnRate;
 
     public MovingEntity(Vector2D position,
@@ -129,7 +129,7 @@ public class MovingEntity extends BaseGameEntity {
             angle = 0;
         }
 
-        //return true if the enemy is facing the target
+        //return true if the sprite is facing the target
         if (angle < 0.00001) {
             return true;
         }
@@ -139,7 +139,7 @@ public class MovingEntity extends BaseGameEntity {
             angle = m_dMaxTurnRate;
         }
 
-        //The next few lines use a rotation matrix to rotate the enemy's heading
+        //The next few lines use a rotation matrix to rotate the sprite's heading
         //vector accordingly
         C2DMatrix RotationMatrix = new C2DMatrix();
 

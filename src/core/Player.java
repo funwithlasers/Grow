@@ -8,14 +8,14 @@ import static common.D2.Vector2D.Vec2DNormalize;
 import static common.D2.Vector2D.div;
 import static common.D2.Vector2D.mul;
 
-public class Player extends Enemy {
+public class Player extends Sprite {
 
     private static int score = 0;
 
 
-    public Player(GameWorld g) {
+    public Player(GameWorld world) {
         super(
-                g,          //gameworld
+                world,          //gameworld
                 new Vector2D(100, 100),  //position
                 0,  //rotation
                 new Vector2D(0, 0),  //initial velocity
@@ -24,16 +24,9 @@ public class Player extends Enemy {
                 100,
                 10,
                 20);
-
-        m_pWorld = g;
-        m_dTimeElapsed = 0.0;
-        InitializeBuffer();
     }
 
-    //TODO: look for better way to grow with a Vector2D parameter so it doesn't depend on Scale().x == Scale().y
-    private void grow(double growth){
-        SetScale(Scale().x + growth);
-    }
+
 
     public void Update(double time_elapsed) {
         //update the time elapsed
@@ -41,14 +34,17 @@ public class Player extends Enemy {
         Vector2D OldPos = Pos();
         m_vPos = new Vector2D(MouseInfo.getPointerInfo().getLocation().getX(), MouseInfo.getPointerInfo().getLocation().getY() );
 
+        score++;
+       // System.out.println(score / 100);
 
+        //grow(.05);
 
         //EnforceNonPenetrationConstraint(this, World()->Agents());
 
         //treat the screen as a toroid
         //WrapAround(m_vPos, m_pWorld.cxClient(), m_pWorld.cyClient());
 
-        //update the enemy's current cell if space partitioning is turned on
+        //update the sprite's current cell if space partitioning is turned on
         if (Steering().isSpacePartitioningOn()) {
             World().CellSpace().UpdateEntity(this, OldPos);
         }
