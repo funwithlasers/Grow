@@ -24,6 +24,8 @@ public class Player extends Sprite {
                 100,
                 10,
                 20);
+
+        SetBRadius(10);
     }
 
     public void accept(Enemy e){

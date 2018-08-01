@@ -7,8 +7,12 @@ package core;
 
 import java.awt.*;
 import java.util.ArrayList;
+
+import common.misc.Cgdi;
 import common.misc.SmootherV2;
 import common.D2.Vector2D;
+import javafx.scene.shape.Circle;
+
 import java.util.List;
 import static common.D2.Vector2D.*;
 import static common.misc.Cgdi.gdi;
@@ -35,11 +39,13 @@ public class Sprite extends MovingEntity {
     protected double m_dTimeElapsed;
     //buffer for the sprite shape
     private List<Vector2D> m_vecspriteVB = new ArrayList<Vector2D>();
+    //radius of circular sprites
 
     /**
      *  fills the sprite's shape buffer with its vertices
      */
     protected void InitializeBuffer() {
+
         final int NumspriteVerts = 3;
 
         Vector2D sprite[] = {new Vector2D(-1.0f, 0.6f),
@@ -82,7 +88,7 @@ public class Sprite extends MovingEntity {
         m_vSmoothedHeading = new Vector2D(0, 0);
         m_bSmoothingOn = false;
         m_dTimeElapsed = 0.0;
-        InitializeBuffer();
+        //InitializeBuffer();
 
         //set up the steering behavior class
         m_pSteering = new SteeringBehavior(this);
@@ -201,6 +207,7 @@ public class Sprite extends MovingEntity {
                     Scale());
         }
         gdi.ClosedShape(m_vecspriteVBTrans);
+        gdi.Circle(Pos(), m_dBoundingRadius);
 
         //render any visual aids / and or user options
         if (m_pWorld.ViewKeys()) {
