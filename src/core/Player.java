@@ -16,7 +16,7 @@ public class Player extends Sprite {
     public Player(GameWorld world) {
         super(
                 world,          //gameworld
-                new Vector2D(100, 100),  //position
+                new Vector2D(0, 0),  //position
                 0,  //rotation
                 new Vector2D(0, 0),  //initial velocity
                 10, //mass
@@ -26,8 +26,16 @@ public class Player extends Sprite {
                 20);
     }
 
-
-
+    public void accept(Enemy e){
+        resize(e.Scale().x /5 );    //CHANGE CONSTANTS
+        m_pWorld.Agents().remove(e);
+    }
+   /*
+    public void accept(PowerUp P){
+        resize(e.Scale().x /5 );    //CHANGE CONSTANTS
+        m_pWorld.Agents().remove(e);
+    }
+*/
     public void Update(double time_elapsed) {
         //update the time elapsed
         m_dTimeElapsed = time_elapsed;
@@ -37,7 +45,7 @@ public class Player extends Sprite {
         score++;
        // System.out.println(score / 100);
 
-        //grow(.05);
+        //resize(.05);
 
         //EnforceNonPenetrationConstraint(this, World()->Agents());
 

@@ -9,6 +9,7 @@
 package core;
 
 //------------------------------------------------------------------------
+//import com.sun.tools.javac.code.Type;
 import common.D2.InvertedAABBox2D;
 import java.awt.event.KeyEvent;
 import common.misc.Cgdi;
@@ -236,10 +237,10 @@ public class GameWorld {
                     Prm.MaxTurnRatePerSecond, //max turn rate
                     Prm.SpriteScale);        //scale
 
-         **/
-        Sprite pSprite = null;
-        if(a % 2 == 0) pSprite = new Enemy(this, SpawnPos, Prm.SpriteScale);
-        else pSprite = new Enemy(this, SpawnPos, 30);
+             **/
+            Sprite pSprite = null;
+            if(a % 2 == 0) pSprite = new Enemy(this, SpawnPos, Prm.SpriteScale, new Vector2D(80,-80));
+            else pSprite = new Enemy(this, SpawnPos, 30, new Vector2D(50,50));
 
             m_Entities.add(pSprite);
 
@@ -277,12 +278,45 @@ public class GameWorld {
     final static int SampleRate = 10;
     private static Smoother<Double> FrameRateSmoother = new Smoother<Double>(SampleRate, 0.0);
 
+
+    /**
+     * Collides
+     *
+    private boolean collides(Sprite s1, Sprite s2){
+        Sprite big_sprite = (s1.Scale().x > s2.Scale().x) ? s1 : s2;
+        EntityFunctionTemplates.Overlapped()
+    }
+*/
+
     /**
      * create a smoother to smooth the framerate
      */
     synchronized public void Update(double time_elapsed) {
         if (m_bPaused) {
             return;
+        }
+
+        /**
+         * hero collisions
+         *
+        for (int a = 0; a < m_Entities.size(); ++a) {
+            if(m_Entities.get(a).Scale().x < pHero.Scale().x && collides(pHero, m_Entities.get(a)))
+                pHero.eat((Enemy) m_Entities.get(a));
+        }
+         */
+
+        List<Sprite> heroCollisions = EntityFunctionTemplates.GetEntityLineSegmentIntersections(
+                m_Entities,
+                0,
+                pHero.m_vPos,
+                pHero.m_vPos.add(new Vector2D(pHero.Scale().x, pHero.Scale().y)));
+
+        if(!heroCollisions.isEmpty()){
+            for(int i = 0; i < heroCollisions.size(); i++){
+                //System.out.println(heroCollisions.get(i).getClass());
+                if(heroCollisions.get(i) instanceof Enemy) pHero.accept((Enemy) heroCollisions.get(i));
+                //else if(heroCollisions.get(i) instanceof Enemy) pHero.accept((PowerUp) heroCollisions.get(i));
+            }
         }
 
         m_dAvFrameTime = FrameRateSmoother.Update(time_elapsed);
@@ -400,6 +434,12 @@ public class GameWorld {
             break;
             case 'p':
             case 'P':
+
+                TogglePause();
+                break;
+
+            case 'a':
+            case 'A':
 
                 TogglePause();
                 break;

@@ -2,20 +2,68 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7d0f60e-b4ee-4e29-a8c7-1dd288ae7e14" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/C2DMatrix$Matrix.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/C2DMatrix.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/InvertedAABBox2D.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/Transformation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/Vector2D.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/Wall2D.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/geometry$span_type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/geometry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/Messaging/Telegram.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/Time/CrudeTimer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/Time/PrecisionTimer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/Cell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CellSpacePartition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/Cgdi$Brush.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/Cgdi.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava$DoubleRef.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava$KeyCache.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/Smoother.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/SmootherV2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/Stream_Utility_function.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/WindowUtils$Window$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/WindowUtils$Window.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/WindowUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/iniFileLoaderBase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/utils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/windows$POINT.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/windows$POINTS.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/windows.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/BaseGameEntity.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Enemy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/GameWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/GameWorld.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/ParamLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/ParamLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/params.ini" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/params.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Sprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/EntityFunctionTemplates.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/GameWorld.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/MessageTypes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/MovingEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Obstacle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/ParamLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Path.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Script1$MyCheckBoxMenuItem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Script1$MyMenuBar$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Script1$MyMenuBar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Script1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Sprite.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior$Deceleration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior$behavior_type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior$summing_method.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/resource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/GameWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/MovingEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/MovingEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/ParamLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/ParamLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/SteeringBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/SteeringBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/params.ini" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/params.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Sprite.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,40 +76,45 @@
     <session id="-1766535647">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.11" value="2" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.11" value="3" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="10" />
           <entry key="ini" value="16" />
-          <entry key="java" value="2402" />
+          <entry key="java" value="3375" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2402" />
+          <entry key="JAVA" value="3375" />
           <entry key="PLAIN_TEXT" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="JAVA/" value="1" />
+          <entry key="JavaScript-modules-diagram//Users/mjlarson13/IdeaProjects/Grow/src/common;/Users/mjlarson13/IdeaProjects/Grow/src/core;" value="1" />
+          <entry key="MODULES/mdl-Grow" value="1" />
           <entry key="gif" value="1" />
           <entry key="ini" value="4" />
-          <entry key="java" value="30" />
+          <entry key="java" value="38" />
           <entry key="png" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="2" />
-          <entry key="JAVA" value="30" />
+          <entry key="JAVA" value="38" />
           <entry key="PLAIN_TEXT" value="4" />
+          <entry key="UML" value="3" />
         </counts>
       </usages-collector>
     </session>
@@ -69,19 +122,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/SteeringBehavior.java">
+        <entry file="file://$PROJECT_DIR$/src/core/BaseGameEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="436" column="73" selection-start-line="436" selection-start-column="73" selection-end-line="436" selection-end-column="73" />
+            <state relative-caret-position="45">
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/BaseGameEntity.java">
+        <entry file="file://$PROJECT_DIR$/src/core/MovingEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="102" column="45" selection-start-line="102" selection-start-column="45" selection-end-line="102" selection-end-column="45" />
+            <state relative-caret-position="1215">
+              <caret line="117" column="40" selection-start-line="117" selection-start-column="40" selection-end-line="117" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -89,8 +142,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/GameWorld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="242" lean-forward="true" selection-start-line="242" selection-end-line="242" />
+            <state relative-caret-position="176">
+              <caret line="316" column="74" selection-start-line="316" selection-start-column="74" selection-end-line="316" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,19 +152,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/resource.java">
+        <entry file="file://$PROJECT_DIR$/src/core/SteeringBehavior.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="10" column="28" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/core/params.ini">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+            <state relative-caret-position="137">
+              <caret line="899" column="18" selection-start-line="899" selection-start-column="18" selection-end-line="899" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -119,39 +163,45 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="951">
-              <caret line="213" column="27" lean-forward="true" selection-start-line="213" selection-start-column="27" selection-end-line="213" selection-end-column="27" />
+            <state relative-caret-position="605">
+              <caret line="158" column="37" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5251#5252#0" expanded="true" />
-                <element signature="e#5309#5310#0" expanded="true" />
-                <element signature="e#6823#6824#0" expanded="true" />
-                <element signature="e#6857#6858#0" expanded="true" />
-                <element signature="e#6889#6890#0" expanded="true" />
-                <element signature="e#6920#6921#0" expanded="true" />
-                <element signature="e#6961#6962#0" expanded="true" />
-                <element signature="e#7016#7017#0" expanded="true" />
-                <element signature="e#7054#7055#0" expanded="true" />
-                <element signature="e#7091#7092#0" expanded="true" />
-                <element signature="e#7124#7125#0" expanded="true" />
-                <element signature="e#7161#7162#0" expanded="true" />
-                <element signature="e#7195#7196#0" expanded="true" />
-                <element signature="e#7233#7234#0" expanded="true" />
-                <element signature="e#7270#7271#0" expanded="true" />
-                <element signature="e#7318#7319#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/Enemy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+            <state relative-caret-position="165">
+              <caret line="33" column="46" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/PowerUp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -159,8 +209,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
+            <state relative-caret-position="253">
+              <caret line="44" column="16" lean-forward="true" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -169,19 +219,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/Obstacle.java">
+        <entry file="file://$PROJECT_DIR$/src/core/EntityFunctionTemplates.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/Path.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+            <state relative-caret-position="137">
+              <caret line="114" column="27" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -197,11 +241,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Prm</find>
-      <find>Player(</find>
-      <find>Jframe</find>
-      <find>Scale</find>
-      <find>bar</find>
       <find>ca</find>
       <find>SteeringB</find>
       <find>Steer</find>
@@ -227,6 +266,11 @@
       <find>pHero</find>
       <find>get</find>
       <find>Steering()</find>
+      <find>Grap</find>
+      <find>Update</find>
+      <find>upda</find>
+      <find>Gra</find>
+      <find>over</find>
     </findStrings>
     <replaceStrings>
       <replace>PlayerScale</replace>
@@ -255,11 +299,11 @@
         <option value="$PROJECT_DIR$/src/core/Main.java" />
         <option value="$PROJECT_DIR$/src/core/SteeringBehavior.java" />
         <option value="$PROJECT_DIR$/src/Enemy.java" />
+        <option value="$PROJECT_DIR$/src/core/params.ini" />
         <option value="$PROJECT_DIR$/src/core/Sprite.java" />
-        <option value="$PROJECT_DIR$/src/core/Enemy.java" />
         <option value="$PROJECT_DIR$/src/core/Player.java" />
         <option value="$PROJECT_DIR$/src/core/GameWorld.java" />
-        <option value="$PROJECT_DIR$/src/core/params.ini" />
+        <option value="$PROJECT_DIR$/src/core/Enemy.java" />
       </list>
     </option>
   </component>
@@ -270,7 +314,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="9" />
+    <option name="x" value="14" />
     <option name="y" value="23" />
     <option name="width" value="1260" />
     <option name="height" value="752" />
@@ -280,6 +324,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -291,18 +337,27 @@
             <path>
               <item name="Grow" type="b2602c69:ProjectViewProjectNode" />
               <item name="Grow" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Grow" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Grow" type="462c0819:PsiDirectoryNode" />
-              <item name="out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Grow" type="b2602c69:ProjectViewProjectNode" />
               <item name="Grow" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Grow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Grow" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="D2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Grow" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Grow" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="misc" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Grow" type="b2602c69:ProjectViewProjectNode" />
@@ -318,20 +373,21 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1532981455411" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533132672291" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build.tools" />
+    <property name="settings.editor.selected.configurable" value="com.intellij.jarRepository.settings.RemoteRepositoriesConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -434,12 +490,14 @@
       <workItem from="1532705191361" duration="3614000" />
       <workItem from="1532721924827" duration="5547000" />
       <workItem from="1532892490530" duration="8856000" />
-      <workItem from="1532976461003" duration="4316000" />
+      <workItem from="1532976461003" duration="12622000" />
+      <workItem from="1533077900559" duration="138000" />
+      <workItem from="1533086221383" duration="5588000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27060000" />
+    <option name="totallyTimeSpent" value="41092000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -451,10 +509,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="9" y="23" width="1260" height="752" extended-state="0" />
+    <frame x="14" y="23" width="1260" height="752" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23399015" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2405583" />
       <window_info id="Structure" order="1" weight="0.24958949" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -462,8 +520,8 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3292683" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.21969697" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.3287879" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21969697" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -531,7 +589,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/core/GameWorld.java</url>
-          <line>162</line>
+          <line>163</line>
           <properties class="core.GameWorld" method="ToggleShowFPS">
             <option name="EMULATED" value="true" />
           </properties>
@@ -562,24 +620,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/misc/Cgdi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3824">
-          <caret line="188" column="17" selection-start-line="188" selection-start-column="12" selection-end-line="188" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/common/misc/iniFileLoaderBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Script1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -589,28 +633,10 @@
     <entry file="file://$PROJECT_DIR$/src/core/example.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/common/D2/Vector2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="45" column="27" lean-forward="true" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
-          <folding>
-            <element signature="e#806#807#0" expanded="true" />
-            <element signature="e#856#857#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/java/awt/event/MouseEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11790">
           <caret line="831" column="17" selection-start-line="831" selection-start-column="17" selection-end-line="831" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -651,27 +677,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/MovingEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="79" selection-start-line="79" selection-end-line="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/EntityFunctionTemplates.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="76" column="45" selection-start-line="76" selection-start-column="45" selection-end-line="76" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -692,31 +701,189 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Obstacle.java">
+    <entry file="file://$PROJECT_DIR$/src/core/params.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+        <state relative-caret-position="-309">
+          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/SteeringBehavior.java">
+    <entry file="file://$PROJECT_DIR$/src/core/Script1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="436" column="73" selection-start-line="436" selection-start-column="73" selection-end-line="436" selection-end-column="73" />
+        <state relative-caret-position="-61">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://MODULES/mdl-Grow">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>MODULES</ID>
+          <OriginalElement>mdl-Grow</OriginalElement>
+          <nodes>
+            <node x="" y="">mdl-Grow</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="60.0" y="15.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">com</node>
+            <node x="" y="">images</node>
+            <node x="" y="">netscape</node>
+            <node x="" y="">oracle</node>
+            <node x="" y="">org</node>
+            <node x="" y="">toolbarButtonGraphics</node>
+            <node x="" y="">sun</node>
+            <node x="" y="">META-INF</node>
+            <node x="" y="">jdk</node>
+            <node x="" y="">core</node>
+            <node x="" y="">apple</node>
+            <node x="" y="">groovyjarjarasm</node>
+            <node x="" y="">java</node>
+            <node x="" y="">groovy</node>
+            <node x="" y="">common</node>
+            <node x="" y="">javax</node>
+            <node x="" y="">groovyjarjarcommonscli</node>
+            <node x="" y="">javafx</node>
+            <node x="" y="">groovyjarjarantlr</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="0.818342151675485" x="254.0" y="264.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram//Users/mjlarson13/IdeaProjects/Grow/src/common;/Users/mjlarson13/IdeaProjects/Grow/src/core;">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/src/common;/Users/mjlarson13/IdeaProjects/Grow/src/core;</OriginalElement>
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="240.0" y="240.0" />
+          <SelectedNodes />
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Obstacle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="35" column="28" lean-forward="true" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/D2/Vector2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+          <folding>
+            <element signature="e#806#807#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/common/misc/Cgdi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="43" column="46" selection-start-line="43" selection-start-column="46" selection-end-line="43" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/MovingEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1215">
+          <caret line="117" column="40" selection-start-line="117" selection-start-column="40" selection-end-line="117" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/BaseGameEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="102" column="45" selection-start-line="102" selection-start-column="45" selection-end-line="102" selection-end-column="45" />
+        <state relative-caret-position="45">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/EntityFunctionTemplates.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="114" column="27" selection-start-line="114" selection-start-column="27" selection-end-line="114" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="158" column="37" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/SteeringBehavior.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="899" column="18" selection-start-line="899" selection-start-column="18" selection-end-line="899" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/GameWorld.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="316" column="74" selection-start-line="316" selection-start-column="74" selection-end-line="316" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/PowerUp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
+        <state relative-caret-position="253">
+          <caret line="44" column="16" lean-forward="true" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -725,54 +892,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/Enemy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+        <state relative-caret-position="165">
+          <caret line="33" column="46" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="951">
-          <caret line="213" column="27" lean-forward="true" selection-start-line="213" selection-start-column="27" selection-end-line="213" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5251#5252#0" expanded="true" />
-            <element signature="e#5309#5310#0" expanded="true" />
-            <element signature="e#6823#6824#0" expanded="true" />
-            <element signature="e#6857#6858#0" expanded="true" />
-            <element signature="e#6889#6890#0" expanded="true" />
-            <element signature="e#6920#6921#0" expanded="true" />
-            <element signature="e#6961#6962#0" expanded="true" />
-            <element signature="e#7016#7017#0" expanded="true" />
-            <element signature="e#7054#7055#0" expanded="true" />
-            <element signature="e#7091#7092#0" expanded="true" />
-            <element signature="e#7124#7125#0" expanded="true" />
-            <element signature="e#7161#7162#0" expanded="true" />
-            <element signature="e#7195#7196#0" expanded="true" />
-            <element signature="e#7233#7234#0" expanded="true" />
-            <element signature="e#7270#7271#0" expanded="true" />
-            <element signature="e#7318#7319#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/GameWorld.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="242" lean-forward="true" selection-start-line="242" selection-end-line="242" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/params.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -833,7 +957,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

@@ -155,8 +155,8 @@ public class Sprite extends MovingEntity {
      *Used to INCREASE the size of Sprite by growth
      */
     //TODO: look for better way to grow with a Vector2D parameter so it doesn't depend on Scale().x == Scale().y
-    protected void grow(double growth){
-        if(growth > 0) SetScale(Scale().x + growth);
+    protected void resize(double growth){
+        SetScale(Scale().x + growth);
     }
 //-------------------------------- Render -------------------------------------
 //-----------------------------------------------------------------------------
