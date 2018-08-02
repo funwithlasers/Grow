@@ -34,14 +34,12 @@ public class Enemy extends Sprite {
 
     }
 
+    public boolean isEdibleBy(Sprite s){
+        return(this.Scale().x < s.Scale().x);
+    }
 
     public void Update(double time_elapsed) {
         super.Update(time_elapsed);
-
-        /**
-         * TODO:Find a less expensive way than setting a steering behavior every time each Enemy updates
-         *
-         */
 
         if(this.m_vScale.x < GameWorld.pHero.m_vScale.x){
             //System.out.println("EVADE");
@@ -51,8 +49,7 @@ public class Enemy extends Sprite {
            // System.out.println("PURSUIT");
         }
 
-        //EnforceNonPenetrationConstraint(this, World()->Agents());
-
+        //EnforceNonPenetrationConstraint(this, World()->Agents())
     }
 
 }

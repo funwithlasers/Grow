@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import common.misc.Cgdi;
 import common.misc.SmootherV2;
 import common.D2.Vector2D;
-import javafx.scene.shape.Circle;
+//import javafx.scene.shape.Circle;
 
 import java.util.List;
 import static common.D2.Vector2D.*;

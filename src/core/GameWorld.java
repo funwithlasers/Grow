@@ -221,7 +221,7 @@ public class GameWorld {
         /**
          *          Adding Enemies
          */
-        for (int a = 0; a < Prm.NumAgents; ++a) {
+        for (int a = 0; a < 6; ++a) {
             //determine a random starting position
             Vector2D SpawnPos = new Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
                     cy / 2.0 + RandomClamped() * cy / 2.0);
@@ -238,26 +238,15 @@ public class GameWorld {
                     Prm.SpriteScale);        //scale
 
              **/
+
             Sprite pSprite = null;
-            if(a % 2 == 0) pSprite = new Enemy(this, SpawnPos, Prm.SpriteScale, new Vector2D(80,-80));
+            if(a % 2 == 0) pSprite = new Enemy(this, SpawnPos, (a+1) * 10, new Vector2D(80,-80));
             else pSprite = new Enemy(this, SpawnPos, 30, new Vector2D(50,50));
 
             m_Entities.add(pSprite);
 
             //add it to the cell subdivision
             m_pCellSpace.AddEntity(pSprite);
-        }
-
-        final boolean SHOAL = true;
-        if (SHOAL) {
-            m_Entities.get(Prm.NumAgents - 1).Steering().FlockingOff();
-            m_Entities.get(Prm.NumAgents - 1).SetScale(new Vector2D(10, 10));
-            m_Entities.get(Prm.NumAgents - 1).Steering().WanderOn();
-            m_Entities.get(Prm.NumAgents - 1).SetMaxSpeed(70);
-
-            for (int i = 0; i < Prm.NumAgents - 1; ++i) {
-                m_Entities.get(i).Steering().EvadeOn(m_Entities.get(Prm.NumAgents - 1));
-            }
         }
         //create any obstacles or walls
         //CreateObstacles();

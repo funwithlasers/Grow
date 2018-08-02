@@ -29,8 +29,16 @@ public class Player extends Sprite {
     }
 
     public void accept(Enemy e){
-        resize(e.Scale().x /5 );    //CHANGE CONSTANTS
-        m_pWorld.Agents().remove(e);
+        System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + e.Scale().x);
+        if(e.isEdibleBy(this)){
+            resize(e.Scale().x);    //CHANGE CONSTANTS
+            m_pWorld.Agents().remove(e);
+        }
+        else{
+            m_pWorld.Agents().removeAll(m_pWorld.Agents());
+            System.out.println("Game Over");
+            System.out.println("Score: " +score);
+        }
     }
    /*
     public void accept(PowerUp P){
