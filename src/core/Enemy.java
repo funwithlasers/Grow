@@ -4,6 +4,8 @@ import common.D2.Vector2D;
 import core.GameWorld;
 import core.Sprite;
 
+import java.util.Random;
+
 import static common.D2.Vector2D.Vec2DNormalize;
 import static common.D2.Vector2D.div;
 import static common.D2.Vector2D.mul;
@@ -23,6 +25,12 @@ public class Enemy extends Sprite {
         scale );
 
       Steering().WallAvoidanceOn();
+
+      Random rand = new Random();
+
+      double radius = rand.nextInt(20) + 1;
+
+      SetBRadius(radius);
 
     }
 
