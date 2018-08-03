@@ -156,7 +156,17 @@ public class Sprite extends MovingEntity {
         }
     }
 
+    public void Devour(Sprite s2) {
+        if (m_dBoundingRadius >= s2.m_dBoundingRadius) {
+            resize(Scale().x / 5);    //CHANGE CONSTANTS
+            m_pWorld.Agents().remove(s2);
+        }
+        if(s2.m_dBoundingRadius > m_dBoundingRadius) {
+            resize(s2.Scale().x / 5);
+            m_pWorld.Agents().remove(this);
+        }
 
+    }
     /**
      *Used to INCREASE the size of Sprite by growth
      */
@@ -206,7 +216,7 @@ public class Sprite extends MovingEntity {
                     Side(),
                     Scale());
         }
-        gdi.ClosedShape(m_vecspriteVBTrans);
+        //gdi.ClosedShape(m_vecspriteVBTrans);
         gdi.Circle(Pos(), m_dBoundingRadius);
 
         //render any visual aids / and or user options

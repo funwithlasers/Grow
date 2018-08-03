@@ -28,10 +28,6 @@ public class Player extends Sprite {
         SetBRadius(10);
     }
 
-    public void accept(Enemy e){
-        resize(e.Scale().x /5 );    //CHANGE CONSTANTS
-        m_pWorld.Agents().remove(e);
-    }
    /*
     public void accept(PowerUp P){
         resize(e.Scale().x /5 );    //CHANGE CONSTANTS

@@ -282,9 +282,9 @@ public class GameWorld {
     /**
      * Collides
      *
-    private boolean collides(Sprite s1, Sprite s2){
-        Sprite big_sprite = (s1.Scale().x > s2.Scale().x) ? s1 : s2;
-        EntityFunctionTemplates.Overlapped()
+    private boolean collides(Sprite s1, Sprite s2) {
+        Sprite big_sprite = (s1.Scale().x > s2.Scale().x) ? return s1 : return s2;
+        EntityFunctionTemplates.Overlapped();
     }
 */
 
@@ -313,8 +313,20 @@ public class GameWorld {
 
         if(!heroCollisions.isEmpty()){
             for(int i = 0; i < heroCollisions.size(); i++){
-                //System.out.println(heroCollisions.get(i).getClass());
-                if(heroCollisions.get(i) instanceof Enemy) pHero.accept((Enemy) heroCollisions.get(i));
+                //System.out.println(heroCollisions.get(i));
+                if(heroCollisions.get(i) instanceof Enemy) {
+                    pHero.Devour(heroCollisions.get(i));
+                        Vector2D SpawnPos = new Vector2D(m_cxClient / 2.0 + RandomClamped() * m_cxClient / 2.0,
+                                m_cyClient / 2.0 + RandomClamped() * m_cyClient / 2.0);
+
+                        Sprite pSprite = null;
+                        pSprite = new Enemy(this, SpawnPos, 30, new Vector2D(50,50));
+
+                        m_Entities.add(pSprite);
+
+                        //add it to the cell subdivision
+                        m_pCellSpace.AddEntity(pSprite);
+                }
                 //else if(heroCollisions.get(i) instanceof Enemy) pHero.accept((PowerUp) heroCollisions.get(i));
             }
         }
