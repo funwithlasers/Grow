@@ -50,7 +50,21 @@ public class Player extends Sprite {
         //update the time elapsed
         m_dTimeElapsed = time_elapsed;
         Vector2D OldPos = Pos();
-        m_vPos = new Vector2D(MouseInfo.getPointerInfo().getLocation().getX(), MouseInfo.getPointerInfo().getLocation().getY() );
+        double x, y;
+        x = MouseInfo.getPointerInfo().getLocation().getX();
+        if(x < Scale().x /2)
+            x = Scale().x /2;
+        if(x > constants.constWindowWidth - Scale().x / 2)
+            x = constants.constWindowWidth - Scale().x / 2;
+        y = MouseInfo.getPointerInfo().getLocation().getY();
+        if(y < Scale().y / 2)
+            y = Scale().y /2;
+        if(y > constants.constWindowHeight - Scale().y / 2)
+            y = constants.constWindowHeight - Scale().y / 2;
+
+
+
+        m_vPos = new Vector2D(x, y);
 
         score++;
        // System.out.println(score / 100);
