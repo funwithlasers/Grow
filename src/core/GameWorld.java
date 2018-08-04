@@ -267,15 +267,6 @@ public class GameWorld {
 
 
     /**
-     * Collides
-     *
-    private boolean collides(Sprite s1, Sprite s2){
-        Sprite big_sprite = (s1.Scale().x > s2.Scale().x) ? s1 : s2;
-        EntityFunctionTemplates.Overlapped()
-    }
-*/
-
-    /**
      * create a smoother to smooth the framerate
      */
     synchronized public void Update(double time_elapsed) {
