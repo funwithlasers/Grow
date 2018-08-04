@@ -221,11 +221,11 @@ public class GameWorld {
         /**
          *          Adding Enemies
          */
-        for (int a = 0; a < 6; ++a) {
+        for (int a = 0; a < 5; ++a) {
             //determine a random starting position
             Vector2D SpawnPos = new Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
                     cy / 2.0 + RandomClamped() * cy / 2.0);
-
+            SpawnPos = new Vector2D(0,0);
         /**
             Sprite pSprite = new Sprite(this,
                     SpawnPos, //initial position
@@ -240,8 +240,7 @@ public class GameWorld {
              **/
 
             Sprite pSprite = null;
-            if(a % 2 == 0) pSprite = new Enemy(this, SpawnPos, (a+1) * 10, new Vector2D(80,-80));
-            else pSprite = new Enemy(this, SpawnPos, 30, new Vector2D(50,50));
+            pSprite = new Enemy(this, SpawnPos, (a+1) * 5, new Vector2D(30,30));
 
             m_Entities.add(pSprite);
 
@@ -294,11 +293,16 @@ public class GameWorld {
         }
          */
 
-        List<Sprite> heroCollisions = EntityFunctionTemplates.GetEntityLineSegmentIntersections(
+
+        /*
+            List<Sprite> heroCollisions = EntityFunctionTemplates.GetEntityLineSegmentIntersections(
+
                 m_Entities,
                 0,
                 pHero.m_vPos,
                 pHero.m_vPos.add(new Vector2D(pHero.Scale().x, pHero.Scale().y)));
+        */
+        List<Sprite> heroCollisions = EntityFunctionTemplates.GetCollisions(m_Entities, (Sprite)pHero);
 
         if(!heroCollisions.isEmpty()){
             for(int i = 0; i < heroCollisions.size(); i++){

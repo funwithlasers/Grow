@@ -41,22 +41,6 @@ public class Sprite extends MovingEntity {
     private List<Vector2D> m_vecspriteVB = new ArrayList<Vector2D>();
     //radius of circular sprites
 
-    /**
-     *  fills the sprite's shape buffer with its vertices
-     */
-    protected void InitializeBuffer() {
-
-        final int NumspriteVerts = 3;
-
-        Vector2D sprite[] = {new Vector2D(-1.0f, 0.6f),
-            new Vector2D(1.0f, 0.0f),
-            new Vector2D(-1.0f, -0.6f)};
-
-        //setup the vertex buffers and calculate the bounding radius
-        for (int vtx = 0; vtx < NumspriteVerts; ++vtx) {
-            m_vecspriteVB.add(sprite[vtx]);
-        }
-    }
 
     //disallow the copying of Sprite types
     //private Sprite(Sprite v) { }

@@ -147,6 +147,18 @@ public class EntityFunctionTemplates {
         return hits;
     }
 
+
+    public static <T extends BaseGameEntity, conT extends List<T>> List<T> GetCollisions(final conT entities, T c1) {
+        ListIterator<T> it = entities.listIterator();
+        List<T> hits = new LinkedList<T>();
+        while (it.hasNext()) {
+            T curEntity = it.next();
+            if((c1.ID() != curEntity.ID()) && (Math.hypot(c1.Pos().x - curEntity.Pos().x, c1.Pos().y - curEntity.Pos().y) < c1.Scale().x + curEntity.Scale().x))
+                hits.add(curEntity);
+        }
+        return hits;
+    }
+
     /**
      *  tests a line segment AB against a container of entities. First of all
      *  a test is made to confirm that the entity is within a specified range of 
