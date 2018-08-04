@@ -3,6 +3,7 @@ package core;
 import common.D2.Vector2D;
 
 import java.awt.*;
+import java.util.List;
 
 import static common.D2.Vector2D.Vec2DNormalize;
 import static common.D2.Vector2D.div;
@@ -62,11 +63,21 @@ public class Player extends Sprite {
         if(y > constants.constWindowHeight - Scale().y / 2)
             y = constants.constWindowHeight - Scale().y / 2;
 
-
-
         m_vPos = new Vector2D(x, y);
-
         score++;
+
+
+
+        List<Sprite> heroCollisions = EntityFunctionTemplates.GetCollisions(m_pWorld.Agents(), (Sprite)this);
+
+        if(!heroCollisions.isEmpty()) {
+            for (int i = 0; i < heroCollisions.size(); i++) {
+                //System.out.println(heroCollisions.get(i).getClass());
+                if (heroCollisions.get(i) instanceof Enemy) accept((Enemy) heroCollisions.get(i));
+                //else if(heroCollisions.get(i) instanceof Enemy) pHero.accept((PowerUp) heroCollisions.get(i));
+            }
+        }
+
        // System.out.println(score / 100);
 
         //resize(.05);
