@@ -73,6 +73,7 @@ public class Sprite extends MovingEntity {
         m_bSmoothingOn = false;
         m_dTimeElapsed = 0.0;
         //InitializeBuffer();
+        SetBRadius(scale);
 
         //set up the steering behavior class
         m_pSteering = new SteeringBehavior(this);
@@ -151,6 +152,18 @@ public class Sprite extends MovingEntity {
 //-------------------------------- Render -------------------------------------
 //-----------------------------------------------------------------------------
 
+    public void Devour(Sprite s2) {
+        if (m_dBoundingRadius >= s2.m_dBoundingRadius) {
+            resize(Scale().x / 5);    //CHANGE CONSTANTS
+            m_pWorld.Agents().remove(s2);
+            m_pWorld.Respawn();
+        }
+        if(s2.m_dBoundingRadius > m_dBoundingRadius) {
+            resize(s2.Scale().x / 5);
+            m_pWorld.Agents().remove(this);
+            m_pWorld.Respawn();
+        }
+    }
     public void Render(boolean pr) {
 
         //render neighboring sprites in different colors if requested
@@ -190,7 +203,7 @@ public class Sprite extends MovingEntity {
                     Side(),
                     Scale());
         }
-        gdi.ClosedShape(m_vecspriteVBTrans);
+        //gdi.ClosedShape(m_vecspriteVBTrans);
         gdi.Circle(Pos(), m_dBoundingRadius);
 
         //render any visual aids / and or user options

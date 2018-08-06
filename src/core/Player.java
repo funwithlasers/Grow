@@ -26,7 +26,6 @@ public class Player extends Sprite {
                 10,
                 20);
 
-        SetBRadius(10);
     }
 
     public void accept(Enemy e){
@@ -72,9 +71,7 @@ public class Player extends Sprite {
 
         if(!heroCollisions.isEmpty()) {
             for (int i = 0; i < heroCollisions.size(); i++) {
-                //System.out.println(heroCollisions.get(i).getClass());
-                if (heroCollisions.get(i) instanceof Enemy) accept((Enemy) heroCollisions.get(i));
-                //else if(heroCollisions.get(i) instanceof Enemy) pHero.accept((PowerUp) heroCollisions.get(i));
+                if (heroCollisions.get(i) instanceof Enemy) Devour(heroCollisions.get(i));
             }
         }
 
