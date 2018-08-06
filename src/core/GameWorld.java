@@ -263,11 +263,12 @@ public class GameWorld {
             m_Entities.add(pSprite);
         }
          */
-        if(m_Entities.size() < 15) {
+        while(m_Entities.size() < 15) {
+
 
             Random rand = new Random();
-            //double radius = ((rand.nextInt(20) + 1) / 10) * pHero.Scale().x;
-            double radius = (Math.random() * .25 + .25 ) * pHero.Scale().x;
+            double radius = ((rand.nextInt(20) + 5) / 10) * pHero.Scale().x;
+           // double radius = (Math.random() * .25 + .25 ) * pHero.Scale().x;
 
             Vector2D SpawnPos = new Vector2D((m_cxClient  + RandomClamped() * m_cxClient )/ 2.0,
                     (m_cyClient / 2.0 + RandomClamped() * m_cyClient) / 2.0);
@@ -282,7 +283,7 @@ public class GameWorld {
 
     public void zoom() {
         for (int i = 0; i < m_Entities.size(); i++) {
-            m_Entities.get(i).resize(-(m_Entities.get(i).Scale().x / 2));
+            m_Entities.get(i).resize(-(m_Entities.get(i).Scale().x / 5));
             //TODO: Increase speed/difficulty/number of enemies (write in separate methods)
             //TODO: Increase rate score increases
         }

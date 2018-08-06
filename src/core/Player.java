@@ -3,6 +3,7 @@ package core;
 import common.D2.Vector2D;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import static common.D2.Vector2D.Vec2DNormalize;
@@ -28,17 +29,24 @@ public class Player extends Sprite {
 
     }
 
-    public void interact(Enemy e){
-        System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + e.Scale().x);
-        if(e.isEdibleBy(this)){
-            resize(e.Scale().x);    //CHANGE CONSTANTS
-            m_pWorld.Agents().remove(e);
+    public void interact(Enemy m){
+        System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + m.Scale().x);
+        if(m.isEdibleBy(this)){
+            resize(m.Scale().x);    //CHANGE CONSTANTS
+            m_pWorld.Agents().remove(m);
             m_pWorld.respawn();
         }
         else{
             m_pWorld.Agents().removeAll(m_pWorld.Agents());
             System.out.println("Game Over");
-            System.out.println("Score: " +score);
+            System.out.println("Score: " + score);
+          /*  try {
+                HighScore hs = new HighScore();
+                hs.manageEndScore(score);
+                hs.displayScores();
+
+            } catch (FileNotFoundException e) { System.out.print("FILE NOT FOUND");}
+            */
         }
     }
    /*
