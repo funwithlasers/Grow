@@ -27,6 +27,19 @@ public class Enemy extends Sprite {
 
     }
 
+    public void eats(Enemy s2) {
+
+        if (s2.isEdibleBy(this)) {
+            resize(5);    //CHANGE CONSTANTS
+            m_pWorld.Agents().remove(s2);
+        }
+        else {
+            s2.resize(5);
+            m_pWorld.Agents().remove(this);
+        }
+        m_pWorld.respawn();
+    }
+
     public boolean isEdibleBy(Sprite s){
         return(this.Scale().x < s.Scale().x);
     }
@@ -42,9 +55,10 @@ public class Enemy extends Sprite {
             //System.out.println("PURSUIT");
         }
 
-        if(m_vPos.x < this.Scale().x) {
-            m_vPos.x = -m_vPos.x;
-        }
+        if(m_vPos.x < this.Scale().x || m_vPos.x > constants.constWindowWidth - Scale().x)
+            m_vVelocity.x = -m_vVelocity.x;
+        if(m_vPos.y < this.Scale().y || m_vPos.y > constants.constWindowHeight - Scale().y)
+            m_vVelocity.y = -m_vVelocity.y;
 
         //EnforceNonPenetrationConstraint(this, World()->Agents())
     }

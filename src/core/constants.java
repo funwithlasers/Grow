@@ -16,6 +16,5 @@ public class constants {
 
     final public static int constWindowWidth  = (int) width;
     final public static int constWindowHeight = (int) height;
-    //final public static int constWindowWidth  = 500;
-    //final public static int constWindowHeight = 500;
+
 }

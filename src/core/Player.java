@@ -28,11 +28,12 @@ public class Player extends Sprite {
 
     }
 
-    public void accept(Enemy e){
+    public void interact(Enemy e){
         System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + e.Scale().x);
         if(e.isEdibleBy(this)){
             resize(e.Scale().x);    //CHANGE CONSTANTS
             m_pWorld.Agents().remove(e);
+            m_pWorld.respawn();
         }
         else{
             m_pWorld.Agents().removeAll(m_pWorld.Agents());
@@ -41,7 +42,7 @@ public class Player extends Sprite {
         }
     }
    /*
-    public void accept(PowerUp P){
+    public void interact(PowerUp P){
         resize(e.Scale().x /5 );    //CHANGE CONSTANTS
         m_pWorld.Agents().remove(e);
     }
@@ -71,7 +72,7 @@ public class Player extends Sprite {
 
         if(!heroCollisions.isEmpty()) {
             for (int i = 0; i < heroCollisions.size(); i++) {
-                if (heroCollisions.get(i) instanceof Enemy) Devour(heroCollisions.get(i));
+                if (heroCollisions.get(i) instanceof Enemy) interact((Enemy)heroCollisions.get(i));
             }
         }
 

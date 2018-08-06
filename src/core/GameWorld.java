@@ -34,6 +34,7 @@ import static common.misc.Stream_Utility_function.ttos;
 import static core.SteeringBehavior.summing_method;
 
 public class GameWorld {
+    private final int MIN_ENEMIES = 8;
 
     public static Player pHero;
     //a container of all the moving entities
@@ -227,20 +228,9 @@ public class GameWorld {
 
             double radius = rand.nextInt(25) + 1;
 
-            Vector2D SpawnPos = new Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
-                    cy / 2.0 + RandomClamped() * cy / 2.0);
+            Vector2D SpawnPos = new Vector2D(constants.constWindowWidth * Math.random(),
+                    constants.constWindowWidth * Math.random());
 
-            /**
-             Sprite pSprite = new Sprite(this,
-             SpawnPos, //initial position
-             RandFloat() * TwoPi, //start rotation
-             new Vector2D(0, 0), //velocity
-             Prm.SpriteMass, //mass
-             Prm.MaxSteeringForce, //max force
-             Prm.MaxSpeed, //max velocity
-             Prm.MaxTurnRatePerSecond, //max turn rate
-             Prm.SpriteScale);        //scale
-             **/
             Sprite pSprite = null;
             pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
 
@@ -250,27 +240,34 @@ public class GameWorld {
             m_pCellSpace.AddEntity(pSprite);
         }
 
-        final boolean SHOAL = true;
-        if (SHOAL) {
-            m_Entities.get(Prm.NumAgents - 1).Steering().FlockingOff();
-            m_Entities.get(Prm.NumAgents - 1).SetScale(new Vector2D(10, 10));
-            m_Entities.get(Prm.NumAgents - 1).Steering().WanderOn();
-            m_Entities.get(Prm.NumAgents - 1).SetMaxSpeed(70);
-
-            for (int i = 0; i < Prm.NumAgents - 1; ++i) {
-                m_Entities.get(i).Steering().EvadeOn(m_Entities.get(Prm.NumAgents - 1));
-            }
-        }
-        //create any obstacles or walls
-        //CreateObstacles();
-        //CreateWalls();
     }
 
-    public void Respawn() {
-        if(m_Entities.size() < Prm.NumAgents + 1) {
+    public void respawn() {
+        /**
+        Iterator<Sprite> itr = m_Entities.iterator();
+        int big = 0, small = 0;
+        while(itr.hasNext()) {
+            if(itr.next().Scale().x < pHero.Scale().x) small++;
+            else big++;
+        }
+        while(big + small < MIN_ENEMIES ){
+            double diff = Math.random() * .4;
+            Vector2D SpawnPos = new Vector2D(constants.constWindowWidth * Math.random(),
+                    constants.constWindowWidth * Math.random());
+            Sprite pSprite = null;
+            if(small - big > 5)
+                pSprite = new Enemy(this, SpawnPos, pHero.Scale().x * (1 + diff), new Vector2D(50, 50));
+            else
+                pSprite = new Enemy(this, SpawnPos, pHero.Scale().x * (1 - (2 * diff)), new Vector2D(50, 50));
+
+            m_Entities.add(pSprite);
+        }
+         */
+        if(m_Entities.size() < 15) {
 
             Random rand = new Random();
-            double radius = ((rand.nextInt(20) + 1) / 10) * pHero.Scale().x;
+            //double radius = ((rand.nextInt(20) + 1) / 10) * pHero.Scale().x;
+            double radius = (Math.random() * .25 + .25 ) * pHero.Scale().x;
 
             Vector2D SpawnPos = new Vector2D((m_cxClient  + RandomClamped() * m_cxClient )/ 2.0,
                     (m_cyClient / 2.0 + RandomClamped() * m_cyClient) / 2.0);
@@ -280,11 +277,14 @@ public class GameWorld {
             m_Entities.add(pSprite);
 
         }
+
     }
 
-    public void Zoom() {
+    public void zoom() {
         for (int i = 0; i < m_Entities.size(); i++) {
             m_Entities.get(i).resize(-(m_Entities.get(i).Scale().x / 2));
+            //TODO: Increase speed/difficulty/number of enemies (write in separate methods)
+            //TODO: Increase rate score increases
         }
     }
     //-------------------------------- dtor ----------------------------------
@@ -301,16 +301,6 @@ public class GameWorld {
     final static int SampleRate = 10;
     private static Smoother<Double> FrameRateSmoother = new Smoother<Double>(SampleRate, 0.0);
 
-
-    /**
-     * Collides
-     *
-     private boolean collides(Sprite s1, Sprite s2) {
-     Sprite big_sprite = (s1.Scale().x > s2.Scale().x) ? return s1 : return s2;
-     EntityFunctionTemplates.Overlapped();
-     }
-     */
-
     /**
      * create a smoother to smooth the framerate
      */
@@ -319,16 +309,8 @@ public class GameWorld {
             return;
         }
 
-        /**
-         * hero collisions
-         *
-         for (int a = 0; a < m_Entities.size(); ++a) {
-         if(m_Entities.get(a).Scale().x < pHero.Scale().x && collides(pHero, m_Entities.get(a)))
-         pHero.eat((Enemy) m_Entities.get(a));
-         }
-         */
         if(pHero.Scale().x > 120) {
-            Zoom();
+            zoom();
         }
 
         for(int i = 0; i < m_Entities.size(); i++) {
