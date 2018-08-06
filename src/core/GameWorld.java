@@ -1,9 +1,9 @@
 /**
- * 
+ *
  *  Desc:   All the environment data and methods for the Steering
  *          Behavior projects. This class is the root of the project's
  *          update and render calls (excluding main of course)
- * 
+ *
  * @author Petr (http://www.sallyx.org/)
  */
 package core;
@@ -13,13 +13,12 @@ package core;
 import common.D2.InvertedAABBox2D;
 import java.awt.event.KeyEvent;
 import common.misc.Cgdi;
-import java.util.ArrayList;
+
+import java.util.*;
+
 import common.D2.Vector2D;
 import static common.D2.Vector2D.*;
 
-import java.util.EmptyStackException;
-import java.util.List;
-import java.util.ListIterator;
 import common.D2.Wall2D;
 import common.misc.CellSpacePartition;
 import static core.EntityFunctionTemplates.*;
@@ -181,7 +180,7 @@ public class GameWorld {
         return m_bViewKeys;
     }
 
-//------------------------------- ctor -----------------------------------
+    //------------------------------- ctor -----------------------------------
 //------------------------------------------------------------------------
     public GameWorld(int cx, int cy) {
 
@@ -221,37 +220,70 @@ public class GameWorld {
         /**
          *          Adding Enemies
          */
-        for (int a = 0; a < 5; ++a) {
+        for (int a = 0; a < Prm.NumAgents; ++a) {
             //determine a random starting position
+
+            Random rand = new Random();
+
+            double radius = rand.nextInt(25) + 1;
+
             Vector2D SpawnPos = new Vector2D(cx / 2.0 + RandomClamped() * cx / 2.0,
                     cy / 2.0 + RandomClamped() * cy / 2.0);
-        /**
-            Sprite pSprite = new Sprite(this,
-                    SpawnPos, //initial position
-                    RandFloat() * TwoPi, //start rotation
-                    new Vector2D(0, 0), //velocity
-                    Prm.SpriteMass, //mass
-                    Prm.MaxSteeringForce, //max force
-                    Prm.MaxSpeed, //max velocity
-                    Prm.MaxTurnRatePerSecond, //max turn rate
-                    Prm.SpriteScale);        //scale
 
+            /**
+             Sprite pSprite = new Sprite(this,
+             SpawnPos, //initial position
+             RandFloat() * TwoPi, //start rotation
+             new Vector2D(0, 0), //velocity
+             Prm.SpriteMass, //mass
+             Prm.MaxSteeringForce, //max force
+             Prm.MaxSpeed, //max velocity
+             Prm.MaxTurnRatePerSecond, //max turn rate
+             Prm.SpriteScale);        //scale
              **/
-
             Sprite pSprite = null;
-            pSprite = new Enemy(this, SpawnPos, (a+1) * 5, new Vector2D(30,30));
+            pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
 
             m_Entities.add(pSprite);
 
             //add it to the cell subdivision
             m_pCellSpace.AddEntity(pSprite);
         }
+
+        final boolean SHOAL = true;
+        if (SHOAL) {
+            m_Entities.get(Prm.NumAgents - 1).Steering().FlockingOff();
+            m_Entities.get(Prm.NumAgents - 1).SetScale(new Vector2D(10, 10));
+            m_Entities.get(Prm.NumAgents - 1).Steering().WanderOn();
+            m_Entities.get(Prm.NumAgents - 1).SetMaxSpeed(70);
+
+            for (int i = 0; i < Prm.NumAgents - 1; ++i) {
+                m_Entities.get(i).Steering().EvadeOn(m_Entities.get(Prm.NumAgents - 1));
+            }
+        }
         //create any obstacles or walls
         //CreateObstacles();
         //CreateWalls();
     }
 
-//-------------------------------- dtor ----------------------------------
+    public void Respawn() {
+        if(m_Entities.size() < Prm.NumAgents) {
+            Random rand = new Random();
+            double radius = rand.nextInt(25) + 1;
+
+            Vector2D SpawnPos = new Vector2D(m_cxClient / 2.0 + RandomClamped() * m_cyClient / 2.0,
+                    m_cyClient / 2.0 + RandomClamped() * m_cyClient / 2.0);
+            Sprite pSprite = null;
+            pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
+
+            m_Entities.add(pSprite);
+
+            //add it to the cell subdivision
+            m_pCellSpace.AddEntity(pSprite);
+        }
+
+    }
+    //-------------------------------- dtor ----------------------------------
 //------------------------------------------------------------------------
     @Override
     protected void finalize() throws Throwable {
@@ -267,12 +299,30 @@ public class GameWorld {
 
 
     /**
+     * Collides
+     *
+     private boolean collides(Sprite s1, Sprite s2) {
+     Sprite big_sprite = (s1.Scale().x > s2.Scale().x) ? return s1 : return s2;
+     EntityFunctionTemplates.Overlapped();
+     }
+     */
+
+    /**
      * create a smoother to smooth the framerate
      */
     synchronized public void Update(double time_elapsed) {
         if (m_bPaused) {
             return;
         }
+
+        /**
+         * hero collisions
+         *
+         for (int a = 0; a < m_Entities.size(); ++a) {
+         if(m_Entities.get(a).Scale().x < pHero.Scale().x && collides(pHero, m_Entities.get(a)))
+         pHero.eat((Enemy) m_Entities.get(a));
+         }
+         */
 
         m_dAvFrameTime = FrameRateSmoother.Update(time_elapsed);
 
@@ -294,13 +344,13 @@ public class GameWorld {
         double hDist = m_cxClient - 2 * bordersize;
 
         Vector2D walls[] = {new Vector2D(hDist * CornerSize + bordersize, bordersize),
-            new Vector2D(m_cxClient - bordersize - hDist * CornerSize, bordersize),
-            new Vector2D(m_cxClient - bordersize, bordersize + vDist * CornerSize),
-            new Vector2D(m_cxClient - bordersize, m_cyClient - bordersize - vDist * CornerSize),
-            new Vector2D(m_cxClient - bordersize - hDist * CornerSize, m_cyClient - bordersize),
-            new Vector2D(hDist * CornerSize + bordersize, m_cyClient - bordersize),
-            new Vector2D(bordersize, m_cyClient - bordersize - vDist * CornerSize),
-            new Vector2D(bordersize, bordersize + vDist * CornerSize)};
+                new Vector2D(m_cxClient - bordersize - hDist * CornerSize, bordersize),
+                new Vector2D(m_cxClient - bordersize, bordersize + vDist * CornerSize),
+                new Vector2D(m_cxClient - bordersize, m_cyClient - bordersize - vDist * CornerSize),
+                new Vector2D(m_cxClient - bordersize - hDist * CornerSize, m_cyClient - bordersize),
+                new Vector2D(hDist * CornerSize + bordersize, m_cyClient - bordersize),
+                new Vector2D(bordersize, m_cyClient - bordersize - vDist * CornerSize),
+                new Vector2D(bordersize, bordersize + vDist * CornerSize)};
 
         final int NumWallVerts = walls.length;
 
@@ -373,7 +423,7 @@ public class GameWorld {
         m_vCrosshair.y = (double) p.y;
     }
 
-//------------------------- HandleKeyPresses -----------------------------
+    //------------------------- HandleKeyPresses -----------------------------
     synchronized public void HandleKeyPresses(KeyEvent wParam) {
         switch (wParam.getKeyChar()) {
             case 'u':
@@ -437,7 +487,7 @@ public class GameWorld {
         }//end switch
     }
 
-//-------------------------- HandleMenuItems -----------------------------
+    //-------------------------- HandleMenuItems -----------------------------
     synchronized public void HandleMenuItems(int wParam, Script1.MyMenuBar hwnd) {
         switch (wParam) {
             case ID_OB_OBSTACLES:
@@ -597,7 +647,7 @@ public class GameWorld {
         }//end switch
     }
 
-//------------------------------ Render ----------------------------------
+    //------------------------------ Render ----------------------------------
 //------------------------------------------------------------------------
     synchronized public void Render() {
         gdi.TransparentText();

@@ -11,7 +11,6 @@ import static common.D2.Vector2D.div;
 import static common.D2.Vector2D.mul;
 
 public class Enemy extends Sprite {
-
     public Enemy(GameWorld world, Vector2D pos, double scale, Vector2D velocity) {
 
       super(world,
@@ -25,12 +24,6 @@ public class Enemy extends Sprite {
         scale );
 
       Steering().WallAvoidanceOn();
-
-      Random rand = new Random();
-
-      double radius = rand.nextInt(20) + 1;
-
-      SetBRadius(radius);
 
     }
 

@@ -2,8 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7d0f60e-b4ee-4e29-a8c7-1dd288ae7e14" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/C2DMatrix.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/D2/C2DMatrix.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/Transformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/D2/Transformation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/Vector2D.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/D2/Vector2D.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/D2/geometry.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/D2/geometry.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/Messaging/Telegram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/Messaging/Telegram.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CellSpacePartition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/misc/CellSpacePartition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/Cgdi.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/misc/Cgdi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava$KeyCache.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava$KeyCache.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/misc/CppToJava.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/Smoother.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/misc/Smoother.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/SmootherV2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/misc/SmootherV2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/common/misc/iniFileLoaderBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/common/misc/iniFileLoaderBase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Enemy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Enemy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Grow/core/EntityFunctionTemplates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/EntityFunctionTemplates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/GameWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/GameWorld.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Main$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Main$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/MovingEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/MovingEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/ParamLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/ParamLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Path.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Script1$MyMenuBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Script1$MyMenuBar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/Sprite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Grow/core/SteeringBehavior.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/GameWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/GameWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/Sprite.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,47 +93,46 @@
     <session id="1896418320">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="README" value="2" />
           <entry key="ini" value="1" />
-          <entry key="java" value="19" />
+          <entry key="java" value="20" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="19" />
+          <entry key="JAVA" value="20" />
           <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="796" />
+          <entry key="java" value="1095" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="796" />
+          <entry key="JAVA" value="1095" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/core/GameWorld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="229" column="48" lean-forward="true" selection-start-line="229" selection-start-column="48" selection-end-line="229" selection-end-column="48" />
+            <state relative-caret-position="72">
+              <caret line="278" column="36" lean-forward="true" selection-start-line="278" selection-start-column="36" selection-end-line="278" selection-end-column="36" />
               <folding>
+                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#1310#1318#0" expanded="true" />
-                <element signature="e#1415#1431#0" expanded="true" />
-                <element signature="e#1555#1563#0" expanded="true" />
                 <element signature="e#2738#2739#0" expanded="true" />
                 <element signature="e#2800#2801#0" expanded="true" />
                 <element signature="e#3116#3117#0" expanded="true" />
@@ -150,7 +181,13 @@
                 <element signature="e#4886#4887#0" expanded="true" />
                 <element signature="e#4919#4920#0" expanded="true" />
                 <element signature="e#4953#4954#0" expanded="true" />
-                <element signature="e#7877#7885#0" expanded="true" />
+                <element signature="e#8359#8367#0" expanded="true" />
+                <element signature="e#10531#11848#0" />
+                <element signature="e#11854#13394#0" />
+                <element signature="e#13400#14157#0" />
+                <element signature="e#14159#15967#0" />
+                <element signature="e#15969#21401#0" />
+                <element signature="e#21403#23976#0" />
               </folding>
             </state>
           </provider>
@@ -159,8 +196,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/MovingEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-415">
-              <caret line="117" column="40" selection-start-line="117" selection-start-column="40" selection-end-line="117" selection-end-column="40" />
+            <state relative-caret-position="442">
+              <caret line="145" selection-start-line="145" selection-end-line="145" />
             </state>
           </provider>
         </entry>
@@ -168,22 +205,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2670">
-              <caret line="182" column="38" lean-forward="true" selection-start-line="182" selection-start-column="38" selection-end-line="182" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#5202#5203#0" expanded="true" />
-                <element signature="e#5246#5247#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="1036" column="10" selection-start-line="1036" selection-start-column="10" selection-end-line="1036" selection-end-column="10" />
+            <state relative-caret-position="242">
+              <caret line="164" column="9" lean-forward="true" selection-start-line="164" selection-start-column="9" selection-end-line="164" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -191,8 +214,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/EntityFunctionTemplates.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="152" column="43" lean-forward="true" selection-start-line="152" selection-start-column="43" selection-end-line="152" selection-end-column="43" />
+            <state relative-caret-position="276">
+              <caret line="159" column="5" lean-forward="true" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -200,14 +223,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="242">
+              <caret line="73" column="90" lean-forward="true" selection-start-line="73" selection-start-column="90" selection-end-line="73" selection-end-column="90" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/Enemy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -283,11 +312,11 @@
         <option value="$PROJECT_DIR$/src/Enemy.java" />
         <option value="$PROJECT_DIR$/src/core/params.ini" />
         <option value="$PROJECT_DIR$/src/common/misc/Cgdi.java" />
+        <option value="$PROJECT_DIR$/src/core/EntityFunctionTemplates.java" />
         <option value="$PROJECT_DIR$/src/core/Enemy.java" />
-        <option value="$PROJECT_DIR$/src/core/Sprite.java" />
         <option value="$PROJECT_DIR$/src/core/Player.java" />
         <option value="$PROJECT_DIR$/src/core/GameWorld.java" />
-        <option value="$PROJECT_DIR$/src/core/EntityFunctionTemplates.java" />
+        <option value="$PROJECT_DIR$/src/core/Sprite.java" />
       </list>
     </option>
   </component>
@@ -303,17 +332,17 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="13" />
-    <option name="y" value="23" />
-    <option name="width" value="1260" />
-    <option name="height" value="752" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="793" />
+    <option name="width" value="814" />
+    <option name="height" value="867" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -361,7 +390,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
@@ -372,7 +400,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533227625466" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1533578750577" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="project.structure.last.edited" value="Project" />
@@ -400,7 +428,7 @@
       </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="10" />
+      <option name="ALTERNATIVE_JRE_PATH" value="C:\Program Files\Java\jdk1.8.0_181\jre" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="core.Main" />
       <module name="Grow" />
@@ -485,11 +513,12 @@
       <workItem from="1533077900559" duration="138000" />
       <workItem from="1533086221383" duration="5588000" />
       <workItem from="1533139961500" duration="9899000" />
+      <workItem from="1533576454181" duration="2611000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56552000" />
+    <option name="totallyTimeSpent" value="59163000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -501,10 +530,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="13" y="23" width="1260" height="752" extended-state="0" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2405583" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16838047" />
       <window_info id="Structure" order="1" weight="0.24935733" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -513,7 +542,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32614556" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.21969697" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.21967655" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -578,12 +607,6 @@
           <line>35</line>
           <properties />
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/core/MovingEntity.java</url>
-          <line>145</line>
-          <properties />
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -809,24 +832,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="1036" column="10" selection-start-line="1036" selection-start-column="10" selection-end-line="1036" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Enemy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
-          <folding>
-            <element signature="e#744#745#0" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Grow.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -847,34 +852,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Sprite.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2670">
-          <caret line="182" column="38" lean-forward="true" selection-start-line="182" selection-start-column="38" selection-end-line="182" selection-end-column="38" />
+        <state relative-caret-position="17612">
+          <caret line="1079" column="10" selection-start-line="1079" selection-start-column="10" selection-end-line="1079" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Enemy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="73" column="90" lean-forward="true" selection-start-line="73" selection-start-column="90" selection-end-line="73" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/EntityFunctionTemplates.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="159" column="5" lean-forward="true" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5202#5203#0" expanded="true" />
-            <element signature="e#5246#5247#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/MovingEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-415">
-          <caret line="117" column="40" selection-start-line="117" selection-start-column="40" selection-end-line="117" selection-end-column="40" />
+        <state relative-caret-position="442">
+          <caret line="145" selection-start-line="145" selection-end-line="145" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="164" column="9" lean-forward="true" selection-start-line="164" selection-start-column="9" selection-end-line="164" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/GameWorld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="229" column="48" lean-forward="true" selection-start-line="229" selection-start-column="48" selection-end-line="229" selection-end-column="48" />
+        <state relative-caret-position="72">
+          <caret line="278" column="36" lean-forward="true" selection-start-line="278" selection-start-column="36" selection-end-line="278" selection-end-column="36" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#1310#1318#0" expanded="true" />
-            <element signature="e#1415#1431#0" expanded="true" />
-            <element signature="e#1555#1563#0" expanded="true" />
             <element signature="e#2738#2739#0" expanded="true" />
             <element signature="e#2800#2801#0" expanded="true" />
             <element signature="e#3116#3117#0" expanded="true" />
@@ -923,27 +952,13 @@
             <element signature="e#4886#4887#0" expanded="true" />
             <element signature="e#4919#4920#0" expanded="true" />
             <element signature="e#4953#4954#0" expanded="true" />
-            <element signature="e#7877#7885#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/EntityFunctionTemplates.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="152" column="43" lean-forward="true" selection-start-line="152" selection-start-column="43" selection-end-line="152" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#8359#8367#0" expanded="true" />
+            <element signature="e#10531#11848#0" />
+            <element signature="e#11854#13394#0" />
+            <element signature="e#13400#14157#0" />
+            <element signature="e#14159#15967#0" />
+            <element signature="e#15969#21401#0" />
+            <element signature="e#21403#23976#0" />
           </folding>
         </state>
       </provider>
@@ -988,7 +1003,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>10</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1005,6 +1020,7 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
