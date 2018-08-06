@@ -272,15 +272,13 @@ public class GameWorld {
             Random rand = new Random();
             double radius = ((rand.nextInt(20) + 1) / 10) * pHero.Scale().x;
 
-            Vector2D SpawnPos = new Vector2D(m_cxClient / 2.0 + RandomClamped() * m_cyClient / 2.0,
-                    m_cyClient / 2.0 + RandomClamped() * m_cyClient / 2.0);
+            Vector2D SpawnPos = new Vector2D((m_cxClient  + RandomClamped() * m_cxClient )/ 2.0,
+                    (m_cyClient / 2.0 + RandomClamped() * m_cyClient) / 2.0);
 
             Sprite pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
 
             m_Entities.add(pSprite);
 
-            //add it to the cell subdivision
-            m_pCellSpace.AddEntity(pSprite);
         }
     }
 
@@ -329,7 +327,7 @@ public class GameWorld {
          pHero.eat((Enemy) m_Entities.get(a));
          }
          */
-        if(pHero.Scale().x > 200) {
+        if(pHero.Scale().x > 120) {
             Zoom();
         }
 

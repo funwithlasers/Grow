@@ -153,16 +153,15 @@ public class Sprite extends MovingEntity {
 //-----------------------------------------------------------------------------
 
     public void Devour(Sprite s2) {
-        if (m_dBoundingRadius >= s2.m_dBoundingRadius) {
+        if (Scale().x >= s2.Scale().x) {
             resize(5);    //CHANGE CONSTANTS
             m_pWorld.Agents().remove(s2);
-            m_pWorld.Respawn();
         }
-        if(s2.m_dBoundingRadius > m_dBoundingRadius) {
-            resize(5);
+        else {
+            s2.resize(5);
             m_pWorld.Agents().remove(this);
-            m_pWorld.Respawn();
         }
+        m_pWorld.Respawn();
     }
     public void Render(boolean pr) {
 
