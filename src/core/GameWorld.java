@@ -267,21 +267,27 @@ public class GameWorld {
     }
 
     public void Respawn() {
-        if(m_Entities.size() < Prm.NumAgents) {
+        if(m_Entities.size() < Prm.NumAgents + 1) {
+
             Random rand = new Random();
-            double radius = rand.nextInt(25) + 1;
+            double radius = ((rand.nextInt(20) + 1) / 10) * pHero.Scale().x;
 
             Vector2D SpawnPos = new Vector2D(m_cxClient / 2.0 + RandomClamped() * m_cyClient / 2.0,
                     m_cyClient / 2.0 + RandomClamped() * m_cyClient / 2.0);
-            Sprite pSprite = null;
-            pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
+
+            Sprite pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
 
             m_Entities.add(pSprite);
 
             //add it to the cell subdivision
             m_pCellSpace.AddEntity(pSprite);
         }
+    }
 
+    public void Zoom() {
+        for (int i = 0; i < m_Entities.size(); i++) {
+            m_Entities.get(i).resize(-(m_Entities.get(i).Scale().x / 2));
+        }
     }
     //-------------------------------- dtor ----------------------------------
 //------------------------------------------------------------------------
@@ -323,6 +329,15 @@ public class GameWorld {
          pHero.eat((Enemy) m_Entities.get(a));
          }
          */
+        if(pHero.Scale().x > 200) {
+            Zoom();
+        }
+
+        for(int i = 0; i < m_Entities.size(); i++) {
+            if(m_Entities.get(i).Scale().x < pHero.Scale().x) {
+
+            }
+        }
 
         m_dAvFrameTime = FrameRateSmoother.Update(time_elapsed);
 

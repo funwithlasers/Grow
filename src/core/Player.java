@@ -52,15 +52,15 @@ public class Player extends Sprite {
         Vector2D OldPos = Pos();
         double x, y;
         x = MouseInfo.getPointerInfo().getLocation().getX();
-        if(x < Scale().x /2)
-            x = Scale().x /2;
-        if(x > constants.constWindowWidth - Scale().x / 2)
-            x = constants.constWindowWidth - Scale().x / 2;
+        if(x < Scale().x)
+            x = Scale().x;
+        if(x > constants.constWindowWidth - Scale().x)
+            x = constants.constWindowWidth - Scale().x;
         y = MouseInfo.getPointerInfo().getLocation().getY();
-        if(y < Scale().y / 2)
-            y = Scale().y /2;
-        if(y > constants.constWindowHeight - Scale().y / 2)
-            y = constants.constWindowHeight - Scale().y / 2;
+        if(y < Scale().y)
+            y = Scale().y;
+        if(y > constants.constWindowHeight - Scale().y)
+            y = constants.constWindowHeight - Scale().y;
 
         m_vPos = new Vector2D(x, y);
         score++;
