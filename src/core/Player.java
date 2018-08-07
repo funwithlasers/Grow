@@ -31,12 +31,13 @@ public class Player extends Sprite {
 
     public void interact(Enemy m){
         System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + m.Scale().x);
-        if(m.isEdibleBy(this)){
-            resize(m.Scale().x);    //CHANGE CONSTANTS
+        if(m.isEdibleBy(this)) {
+            resize(5);    //CHANGE CONSTANTS
             m_pWorld.Agents().remove(m);
             m_pWorld.respawn();
+            m_pWorld.zoom();
         }
-        else{
+        else {
             m_pWorld.Agents().removeAll(m_pWorld.Agents());
             System.out.println("Game Over");
             System.out.println("Score: " + score);

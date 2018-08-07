@@ -40,7 +40,7 @@ public class Enemy extends Sprite {
         m_pWorld.respawn();
     }
 
-    public boolean isEdibleBy(Sprite s){
+    public boolean isEdibleBy(Sprite s) {
         return(this.Scale().x < s.Scale().x);
     }
 
@@ -49,7 +49,9 @@ public class Enemy extends Sprite {
 
         if(this.Scale().x < GameWorld.pHero.Scale().x) {
             //System.out.println("EVADE");
-            Steering().EvadeOn(GameWorld.pHero); }
+            Steering().EvadeOn(GameWorld.pHero);
+
+        }
         else {
             Steering().PursuitOn(GameWorld.pHero);
             //System.out.println("PURSUIT");

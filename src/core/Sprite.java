@@ -162,18 +162,24 @@ public class Sprite extends MovingEntity {
             } else if (IsTagged()) {
                 gdi.GreenPen();
             } else {
-                gdi.BluePen();
+                gdi.BlackBrush();
             }
         } else {
             gdi.BluePen();
         }
 
-        if (Steering().isInterposeOn()) {
-            gdi.RedPen();
+        if (Steering().isPursuitOn()) {
+            gdi.DarkGreenBrush();
+            gdi.GreyPen();
         }
 
-        if (Steering().isHideOn()) {
-            gdi.GreenPen();
+        if (Steering().isEvadeOn()) {
+            gdi.LightBlueBrush();
+            gdi.BluePen();
+        }
+
+        if (Scale().x % 5 == 0) {
+            gdi.BlackBrush();
         }
 
         //a vector to hold the transformed vertices
@@ -192,7 +198,6 @@ public class Sprite extends MovingEntity {
                     Side(),
                     Scale());
         }
-        //gdi.ClosedShape(m_vecspriteVBTrans);
         gdi.Circle(Pos(), m_dBoundingRadius);
 
         //render any visual aids / and or user options
