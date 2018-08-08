@@ -232,6 +232,9 @@ public class GameWorld {
             double radius = ((Math.random() * 2) + 0.1) * pHero.Scale().x;
 
             Vector2D SpawnPos = new Vector2D(Math.random() * constants.constWindowWidth, Math.random() * constants.constWindowHeight);
+            while (SpawnPos.x + radius == pHero.Pos().x + radius && SpawnPos.y + radius == pHero.Pos().y + radius) {
+                SpawnPos = new Vector2D(Math.random() * constants.constWindowWidth, Math.random() * constants.constWindowHeight);
+            }
 
             Vector2D randVel = new Vector2D(Math.random()*70 + 5, Math.random()*70 + 5);
 
@@ -646,7 +649,7 @@ public class GameWorld {
                     gdi.Circle(pV.Pos(), pV.BRadius());
                 }
 
-                gdi.GreenPen();
+                gdi.DarkGreenPen();
                 gdi.Circle(m_Entities.get(a).Pos(), Prm.ViewDistance);
             }
         }
