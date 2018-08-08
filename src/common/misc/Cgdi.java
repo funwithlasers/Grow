@@ -397,7 +397,7 @@ public class Cgdi {
         m_OldPen = hdc.getColor();
         m_OldBrush = new Brush(hdc.getBackground());
         m_OldFont = hdc.getFont();
-        hdc.setFont(new Font(m_OldFont.getFontName(), Font.BOLD, 12));
+        hdc.setFont(new Font(m_OldFont.getFontName(), Font.BOLD, 24));
         m_hdc.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
                 RenderingHints.VALUE_ANTIALIAS_ON);
     }

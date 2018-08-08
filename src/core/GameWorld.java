@@ -11,14 +11,19 @@ package core;
 //------------------------------------------------------------------------
 //import com.sun.tools.javac.code.Type;
 import common.D2.InvertedAABBox2D;
+
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 import common.Time.PrecisionTimer;
 import common.misc.Cgdi;
 
 import java.util.*;
+import java.util.List;
 
 import common.D2.Vector2D;
+
+import static common.D2.Transformation.WorldTransform;
 import static common.D2.Vector2D.*;
 
 import common.D2.Wall2D;
@@ -219,6 +224,33 @@ public class GameWorld {
          */
         pHero = new Player(this);
         m_Entities.add(pHero);
+
+        Sprite scoreDisplay = new Sprite(this,
+                new Vector2D(0,0),
+                0,
+                new Vector2D(0,0),
+                1,            //GARBAGE
+                20,       //GARBAGE
+                200,       //GARBAGE
+                20,          //GARBAGE
+                75 ){
+            private int scOut;
+
+            @Override
+            public void Update(double time_elapsed) {
+                super.Update(time_elapsed);
+                scOut = Player.getScore();
+            }
+
+            public void Render(boolean pr) {
+                super.Render(pr);
+                gdi.TextAtPos(0,0, "Score: " + scOut);
+                gdi.ThickWhitePen();
+                gdi.TextColor(0,0,0);
+            }
+        };
+        scoreDisplay.SetEntityType(-1);     //
+        m_Entities.add(scoreDisplay);
 
         /**
          *          Adding Enemies

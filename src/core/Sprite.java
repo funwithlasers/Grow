@@ -197,7 +197,6 @@ public class Sprite extends MovingEntity {
                     Side(),
                     Scale());
         }
-        gdi.Circle(Pos(), m_dBoundingRadius);
 
         //render any visual aids / and or user options
         if (m_pWorld.ViewKeys()) {

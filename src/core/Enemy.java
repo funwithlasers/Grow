@@ -9,6 +9,7 @@ import java.util.Random;
 import static common.D2.Vector2D.Vec2DNormalize;
 import static common.D2.Vector2D.div;
 import static common.D2.Vector2D.mul;
+import static common.misc.Cgdi.gdi;
 
 public class Enemy extends Sprite {
 
@@ -69,6 +70,12 @@ public class Enemy extends Sprite {
             m_vVelocity.y = -m_vVelocity.y;
 
         //EnforceNonPenetrationConstraint(this, World()->Agents())
+    }
+
+    @Override
+    public void Render(boolean pr) {
+        super.Render(pr);
+        gdi.Circle(Pos(), m_dBoundingRadius);
     }
 
 }

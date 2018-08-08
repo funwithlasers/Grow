@@ -9,6 +9,7 @@ import java.util.List;
 import static common.D2.Vector2D.Vec2DNormalize;
 import static common.D2.Vector2D.div;
 import static common.D2.Vector2D.mul;
+import static common.misc.Cgdi.gdi;
 
 public class Player extends Sprite {
 
@@ -37,6 +38,7 @@ public class Player extends Sprite {
         System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + m.Scale().x);
         if(m.isEdibleBy(this)) {
             resize(5);    //CHANGE CONSTANTS
+            score += m.Scale().x * 10;
             m_pWorld.Agents().remove(m);
             Enemy.numEnemies--;
             m_pWorld.respawn();
@@ -54,6 +56,10 @@ public class Player extends Sprite {
             */
         }
     }
+
+    public static int getScore(){
+        return score;
+    }
    /*
     public void interact(PowerUp P){
         resize(e.Scale().x /5 );    //CHANGE CONSTANTS
@@ -66,44 +72,32 @@ public class Player extends Sprite {
         Vector2D OldPos = Pos();
         double x, y;
         x = MouseInfo.getPointerInfo().getLocation().getX();
-        if(x < Scale().x)
+        if (x < Scale().x)
             x = Scale().x;
-        if(x > constants.constWindowWidth - Scale().x)
+        if (x > constants.constWindowWidth - Scale().x)
             x = constants.constWindowWidth - Scale().x;
         y = MouseInfo.getPointerInfo().getLocation().getY();
-        if(y < Scale().y)
+        if (y < Scale().y)
             y = Scale().y;
-        if(y > constants.constWindowHeight - Scale().y)
+        if (y > constants.constWindowHeight - Scale().y)
             y = constants.constWindowHeight - Scale().y;
 
         m_vPos = new Vector2D(x, y);
-        score++;
+        score += score_rate;
 
 
+        List<Sprite> heroCollisions = EntityFunctionTemplates.GetCollisions(m_pWorld.Agents(), (Sprite) this);
 
-        List<Sprite> heroCollisions = EntityFunctionTemplates.GetCollisions(m_pWorld.Agents(), (Sprite)this);
-
-        if(!heroCollisions.isEmpty()) {
+        if (!heroCollisions.isEmpty()) {
             for (int i = 0; i < heroCollisions.size(); i++) {
-                if (heroCollisions.get(i) instanceof Enemy) interact((Enemy)heroCollisions.get(i));
+                if (heroCollisions.get(i) instanceof Enemy) interact((Enemy) heroCollisions.get(i));
             }
         }
-
-
-       // System.out.println(score / 100);
-
-        //resize(.05);
-
-        //EnforceNonPenetrationConstraint(this, World()->Agents());
-
-        //treat the screen as a toroid
-        //WrapAround(m_vPos, m_pWorld.cxClient(), m_pWorld.cyClient());
-
-        //update the sprite's current cell if space partitioning is turned on
-        if (Steering().isSpacePartitioningOn()) {
-            World().CellSpace().UpdateEntity(this, OldPos);
-        }
-
     }
 
+    @Override
+    public void Render(boolean pr) {
+        super.Render(pr);
+        gdi.Circle(Pos(), m_dBoundingRadius);
+    }
 }

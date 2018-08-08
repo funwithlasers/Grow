@@ -58,13 +58,13 @@ public class Main {
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setUndecorated(true);
         window.setVisible(true);
+        window.setLayout(new BorderLayout());
 
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Point hotSpot = new Point(0,0);
         BufferedImage cursorImage = new BufferedImage(1, 1, BufferedImage.TRANSLUCENT);
         Cursor invisibleCursor = toolkit.createCustomCursor(cursorImage, hotSpot, "InvisibleCursor");
         window.getContentPane().setCursor(invisibleCursor);
-
 
 
         window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -176,4 +176,6 @@ public class Main {
             }
         }//end while
     }
+
+
 }

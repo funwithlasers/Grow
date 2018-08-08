@@ -153,7 +153,9 @@ public class EntityFunctionTemplates {
         List<T> hits = new LinkedList<T>();
         while (it.hasNext()) {
             T curEntity = it.next();
-            if((c1.ID() != curEntity.ID()) && (Math.hypot(c1.Pos().x - curEntity.Pos().x, c1.Pos().y - curEntity.Pos().y) < c1.Scale().x + curEntity.Scale().x))
+            if((curEntity.ID() != -1) && 
+                    (c1.ID() != curEntity.ID()) &&
+                    (Math.hypot(c1.Pos().x - curEntity.Pos().x, c1.Pos().y - curEntity.Pos().y) < c1.Scale().x + curEntity.Scale().x))
                 hits.add(curEntity);
         }
         return hits;
