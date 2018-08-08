@@ -89,6 +89,7 @@ public class Player extends Sprite {
             }
         }
 
+
        // System.out.println(score / 100);
 
         //resize(.05);

@@ -160,7 +160,7 @@ public class Sprite extends MovingEntity {
             if (ID() == 0) {
                 gdi.RedPen();
             } else if (IsTagged()) {
-                gdi.GreenPen();
+                gdi.DarkGreenPen();
             } else {
                 gdi.BlackBrush();
             }
@@ -169,7 +169,7 @@ public class Sprite extends MovingEntity {
         }
 
         if (Steering().isPursuitOn()) {
-            gdi.DarkGreenBrush();
+            gdi.GreenBrush();
             gdi.GreyPen();
         }
 
@@ -177,8 +177,7 @@ public class Sprite extends MovingEntity {
             gdi.LightBlueBrush();
             gdi.BluePen();
         }
-
-        if (Scale().x % 5 == 0) {
+        if (this instanceof Player) {
             gdi.BlackBrush();
         }
 

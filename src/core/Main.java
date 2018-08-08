@@ -16,9 +16,9 @@ import common.Time.PrecisionTimer;
 
 import static common.misc.Cgdi.gdi;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
-import javax.swing.JFrame;
+
 import static core.constants.*;
 import static common.misc.WindowUtils.*;
 import static core.resource.*;
@@ -86,7 +86,7 @@ public class Main {
                 hdcBackBuffer.setPaint(Color.RED);
                 gdi.StartDrawing(hdcBackBuffer);
                 //fill our backbuffer with white
-                gdi.fillRect(Color.GREEN, 0, 0, constWindowWidth, constWindowHeight);
+                gdi.fillRect(Color.DARK_GRAY, 0, 0, constWindowWidth, constWindowHeight);
                 GameWorldLock.lock();
                 g_GameWorld.Render();
                 GameWorldLock.unlock();
@@ -126,6 +126,7 @@ public class Main {
                         System.exit(0);
                     }
                     break;
+                    /*
                     case 'r':
                     case 'R': {
                         GameWorldLock.lock();
@@ -133,7 +134,7 @@ public class Main {
                         g_GameWorld = new GameWorld(cxClient, cyClient);
                         GameWorldLock.unlock();
                     }
-                    break;
+                    break;*/
                 }//end switch
 
                 //handle any others
