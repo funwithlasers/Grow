@@ -2,7 +2,6 @@ package core;
 
 import javax.swing.*;
 import java.io.*;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class HighScore extends JPanel {
@@ -10,15 +9,9 @@ public class HighScore extends JPanel {
     private NameScore[] topPlayers = new NameScore[10];
     private String fileName = "highscore.txt";
 
-    private class NameScore implements Comparable<NameScore>{
+    private class NameScore {
         public int score;
         public String name;
-
-
-        @Override
-        public int compareTo(NameScore o) {
-            return score - o.score;
-        }
     }
 
     public HighScore() throws FileNotFoundException {

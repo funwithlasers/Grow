@@ -181,28 +181,6 @@ public class Sprite extends MovingEntity {
             gdi.BlackBrush();
         }
 
-        //a vector to hold the transformed vertices
-        List<Vector2D> m_vecspriteVBTrans;
-
-        if (isSmoothingOn()) {
-            m_vecspriteVBTrans = WorldTransform(m_vecspriteVB,
-                    Pos(),
-                    SmoothedHeading(),
-                    SmoothedHeading().Perp(),
-                    Scale());
-        } else {
-            m_vecspriteVBTrans = WorldTransform(m_vecspriteVB,
-                    Pos(),
-                    Heading(),
-                    Side(),
-                    Scale());
-        }
-
-        //render any visual aids / and or user options
-        if (m_pWorld.ViewKeys()) {
-            Steering().RenderAids();
-        }
-
     }
     //-------------------------------------------accessor methods
 

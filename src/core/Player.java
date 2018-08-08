@@ -45,6 +45,30 @@ public class Player extends Sprite {
         }
         else {
             m_pWorld.Agents().removeAll(m_pWorld.Agents());
+            Sprite gameOver = new Sprite(m_pWorld,
+                    new Vector2D(constants.constWindowWidth/2, constants.constWindowHeight/2 - 50),
+                    0,
+                    new Vector2D(0,0),
+                    1,            //GARBAGE
+                    20,       //GARBAGE
+                    200,       //GARBAGE
+                    20,          //GARBAGE
+                    75 ){
+
+                @Override
+                public void Update(double time_elapsed) {
+                    super.Update(time_elapsed);
+                }
+
+                public void Render(boolean pr) {
+                    super.Render(pr);
+                    gdi.ThickRedPen();
+                    gdi.TextAtPos(constants.constWindowWidth/2 - 200,constants.constWindowHeight/2 - Scale().y/2, "Game Over \n Final Score: " + score);
+                }
+            };
+            //gameOver.SetEntityType(-1);     //
+            m_pWorld.Agents().add(gameOver);
+
             System.out.println("Game Over");
             System.out.println("Score: " + score);
           /*  try {

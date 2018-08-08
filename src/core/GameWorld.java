@@ -240,6 +240,9 @@ public class GameWorld {
             public void Update(double time_elapsed) {
                 super.Update(time_elapsed);
                 scOut = Player.getScore();
+                if(Enemy.numEnemies == 0){
+                    SetVelocity(new Vector2D(30,30) );
+                }
             }
 
             public void Render(boolean pr) {
