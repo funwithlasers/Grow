@@ -11,19 +11,22 @@ import static common.D2.Vector2D.div;
 import static common.D2.Vector2D.mul;
 
 public class Enemy extends Sprite {
+
+    public static int numEnemies = 0;
+
     public Enemy(GameWorld world, Vector2D pos, double scale, Vector2D velocity) {
 
       super(world,
       pos,
       0,
-      new Vector2D(0,0),
+      velocity,
       1,            //GARBAGE
       20,       //GARBAGE
       200,       //GARBAGE
-    5,          //GARBAGE
+    20,          //GARBAGE
         scale );
 
-      Steering().WallAvoidanceOn();
+      numEnemies++;
 
     }
 
@@ -32,10 +35,12 @@ public class Enemy extends Sprite {
         if (s2.isEdibleBy(this)) {
             resize(5);    //CHANGE CONSTANTS
             m_pWorld.Agents().remove(s2);
+            Enemy.numEnemies--;
         }
         else {
             s2.resize(5);
             m_pWorld.Agents().remove(this);
+            Enemy.numEnemies--;
         }
         m_pWorld.respawn();
     }
@@ -46,15 +51,16 @@ public class Enemy extends Sprite {
 
     public void Update(double time_elapsed) {
         super.Update(time_elapsed);
+        if(Scale().x < 3){
+            World().Agents().remove(this);
+            Enemy.numEnemies--;
+        }
 
         if(this.Scale().x < GameWorld.pHero.Scale().x) {
-            //System.out.println("EVADE");
             Steering().EvadeOn(GameWorld.pHero);
-
         }
         else {
             Steering().PursuitOn(GameWorld.pHero);
-            //System.out.println("PURSUIT");
         }
 
         if(m_vPos.x < this.Scale().x || m_vPos.x > constants.constWindowWidth - Scale().x)

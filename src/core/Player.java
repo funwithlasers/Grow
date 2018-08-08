@@ -32,10 +32,10 @@ public class Player extends Sprite {
     public void interact(Enemy m){
         System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + m.Scale().x);
         if(m.isEdibleBy(this)) {
-            resize(5);    //CHANGE CONSTANTS
+            resize(20);    //CHANGE CONSTANTS
             m_pWorld.Agents().remove(m);
+            Enemy.numEnemies--;
             m_pWorld.respawn();
-            m_pWorld.zoom();
         }
         else {
             m_pWorld.Agents().removeAll(m_pWorld.Agents());

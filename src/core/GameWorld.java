@@ -12,6 +12,8 @@ package core;
 //import com.sun.tools.javac.code.Type;
 import common.D2.InvertedAABBox2D;
 import java.awt.event.KeyEvent;
+
+import common.Time.PrecisionTimer;
 import common.misc.Cgdi;
 
 import java.util.*;
@@ -260,13 +262,15 @@ public class GameWorld {
             m_Entities.add(pSprite);
         }
          */
-        while(m_Entities.size() < 15) {
+        while(Enemy.numEnemies < 12) {
             double radius = ((Math.random() * 2) + 0.1) * pHero.Scale().x;
 
             Vector2D SpawnPos = new Vector2D((m_cxClient  + RandomClamped() * m_cxClient )/ 2.0,
                     (m_cyClient / 2.0 + RandomClamped() * m_cyClient) / 2.0);
 
-            Sprite pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
+            Vector2D randVel = new Vector2D(Math.random()*70 + 5, Math.random()*70 + 5);
+
+            Sprite pSprite = new Enemy(this, SpawnPos, radius, randVel);
 
             m_Entities.add(pSprite);
         }
@@ -274,13 +278,16 @@ public class GameWorld {
     }
 
     public void zoom() {
-        if(pHero.Scale().x > 100) {
+        Vector2D center = new Vector2D(constants.constWindowWidth, constants.constWindowWidth);
+        //m_bPaused = true;
+        while(pHero.Scale().x > 50) {
             for (int i = 0; i < m_Entities.size(); i++) {
-                m_Entities.get(i).resize(-(m_Entities.get(i).Scale().x / 5));
+                m_Entities.get(i).resize(-1);
                 //TODO: Increase speed/difficulty/number of enemies (write in separate methods)
                 //TODO: Increase rate score increases
             }
         }
+        //m_bPaused = false;
 
     }
     //-------------------------------- dtor ----------------------------------
@@ -305,7 +312,7 @@ public class GameWorld {
             return;
         }
 
-        if(pHero.Scale().x > 120) {
+        if(pHero.Scale().x > 150) {
             zoom();
         }
 
