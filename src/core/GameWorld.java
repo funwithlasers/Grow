@@ -223,50 +223,15 @@ public class GameWorld {
         /**
          *          Adding Enemies
          */
-        for (int a = 0; a < Prm.NumAgents; ++a) {
-            //determine a random starting position
-            Random rand = new Random();
-
-            double radius = rand.nextInt(25) + 1;
-
-            Vector2D SpawnPos = new Vector2D(constants.constWindowWidth * Math.random(),
-                    constants.constWindowWidth * Math.random());
-
-            Sprite pSprite = null;
-            pSprite = new Enemy(this, SpawnPos, radius, new Vector2D(50,50));
-
-            m_Entities.add(pSprite);
-
-            //add it to the cell subdivision
-        }
+        respawn();
     }
 
     public void respawn() {
-        /**
-        Iterator<Sprite> itr = m_Entities.iterator();
-        int big = 0, small = 0;
-        while(itr.hasNext()) {
-            if(itr.next().Scale().x < pHero.Scale().x) small++;
-            else big++;
-        }
-        while(big + small < MIN_ENEMIES ){
-            double diff = Math.random() * .4;
-            Vector2D SpawnPos = new Vector2D(constants.constWindowWidth * Math.random(),
-                    constants.constWindowWidth * Math.random());
-            Sprite pSprite = null;
-            if(small - big > 5)
-                pSprite = new Enemy(this, SpawnPos, pHero.Scale().x * (1 + diff), new Vector2D(50, 50));
-            else
-                pSprite = new Enemy(this, SpawnPos, pHero.Scale().x * (1 - (2 * diff)), new Vector2D(50, 50));
 
-            m_Entities.add(pSprite);
-        }
-         */
         while(Enemy.numEnemies < 12) {
             double radius = ((Math.random() * 2) + 0.1) * pHero.Scale().x;
 
-            Vector2D SpawnPos = new Vector2D((m_cxClient  + RandomClamped() * m_cxClient )/ 2.0,
-                    (m_cyClient / 2.0 + RandomClamped() * m_cyClient) / 2.0);
+            Vector2D SpawnPos = new Vector2D(Math.random() * constants.constWindowWidth, Math.random() * constants.constWindowHeight);
 
             Vector2D randVel = new Vector2D(Math.random()*70 + 5, Math.random()*70 + 5);
 
@@ -282,9 +247,10 @@ public class GameWorld {
         //m_bPaused = true;
         while(pHero.Scale().x > 50) {
             for (int i = 0; i < m_Entities.size(); i++) {
-                m_Entities.get(i).resize(-1);
-                //TODO: Increase speed/difficulty/number of enemies (write in separate methods)
-                //TODO: Increase rate score increases
+                Sprite temp = m_Entities.get(i);
+                temp.SetScale(new Vector2D(temp.Scale().x / 5,temp.Scale().x / 5));
+                temp.SetVelocity(new Vector2D(temp.Velocity().x * 1.2, temp.Velocity().y *1.2));
+                pHero.bumpScoreRate();
             }
         }
         //m_bPaused = false;
@@ -312,7 +278,7 @@ public class GameWorld {
             return;
         }
 
-        if(pHero.Scale().x > 150) {
+        if(pHero.Scale().x > 100) {
             zoom();
         }
 

@@ -13,7 +13,7 @@ import static common.D2.Vector2D.mul;
 public class Player extends Sprite {
 
     private static int score = 0;
-
+    private int score_rate = 5;
 
     public Player(GameWorld world) {
         super(
@@ -29,10 +29,14 @@ public class Player extends Sprite {
 
     }
 
+    public void bumpScoreRate(){
+        score_rate++;
+    }
+
     public void interact(Enemy m){
         System.out.println("player scale: " + Scale().x + "    ||    " + "Enemy scale: " + m.Scale().x);
         if(m.isEdibleBy(this)) {
-            resize(20);    //CHANGE CONSTANTS
+            resize(5);    //CHANGE CONSTANTS
             m_pWorld.Agents().remove(m);
             Enemy.numEnemies--;
             m_pWorld.respawn();
