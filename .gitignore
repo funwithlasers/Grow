@@ -31,3 +31,6 @@ target/
 *.ipr
 *.xml
 .idea/
+
+# Mac
+*.DS_Store
